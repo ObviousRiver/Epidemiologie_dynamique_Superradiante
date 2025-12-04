@@ -122,17 +122,13 @@ def plot_mode_decomposition(t_data, sr_model, save_path=None):
     modes = sr_model.get_mode_parameters()
     colors = plt.cm.viridis(np.linspace(0, 0.9, len(modes)))
 
-    # Tracer chaque mode individuellement
+    # Tracer chaque mode individuellement avec formule sech²
     for i, mode in enumerate(modes):
-        A = mode['A']
-        tau = mode['tau']
-        T = mode['T']
-
-        effective_t = np.maximum(t_data - tau, 0)
-        mode_intensity = A * (effective_t**2) * np.exp(-effective_t / T)
+        # Utiliser la nouvelle méthode du modèle
+        mode_intensity = sr_model.get_mode_intensity(t_data, i)
 
         ax.plot(t_data, mode_intensity,
-                label=f"Mode {mode['mode']}: τ={tau:.1f}j, T={T:.1f}j",
+                label=f"Mode {mode['mode']}: τ={mode['tau']:.1f}j, T={mode['T']:.1f}j",
                 color=colors[i], linewidth=2)
 
     # Tracer la somme totale
@@ -245,9 +241,8 @@ def create_report_figure(t_data, y_data, sr_model, sir_model,
     colors = plt.cm.viridis(np.linspace(0, 0.9, len(modes)))
 
     for i, mode in enumerate(modes):
-        A, tau, T = mode['A'], mode['tau'], mode['T']
-        effective_t = np.maximum(t_data - tau, 0)
-        mode_intensity = A * (effective_t**2) * np.exp(-effective_t / T)
+        # Utiliser formule sech² via la méthode du modèle
+        mode_intensity = sr_model.get_mode_intensity(t_data, i)
         ax2.plot(t_data, mode_intensity,
                  label=f"Mode {mode['mode']}", color=colors[i], linewidth=2)
 

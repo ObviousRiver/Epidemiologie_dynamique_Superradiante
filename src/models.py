@@ -30,6 +30,11 @@ class SuperRadiantModel:
         """
         Calcule l'intensité super-radiante pour des paramètres donnés.
 
+        Utilise la formule sech² canonique de la super-radiance quantique:
+        I(t) = Σ A_k * sech²((t - τ_k) / (2T_k))
+
+        où sech(x) = 1/cosh(x) est la sécante hyperbolique.
+
         Args:
             t (array): Temps
             *params: Paramètres du modèle (A, tau, T pour chaque mode)
@@ -42,8 +47,10 @@ class SuperRadiantModel:
             A = params[i*3]
             tau = params[i*3 + 1]
             T = params[i*3 + 2]
-            effective_t = np.maximum(t - tau, 0)
-            intensity += A * (effective_t**2) * np.exp(-effective_t / T)
+            # Formule sech²: A * (1/cosh(x))²
+            # où x = (t - tau) / (2T)
+            x = (t - tau) / (2.0 * T)
+            intensity += A * (1.0 / np.cosh(x))**2
         return intensity
 
     def fit(self, t_data, y_data, maxfev=30000):
@@ -99,12 +106,28 @@ class SuperRadiantModel:
 
         modes_sorted = sorted(modes, key=lambda x: x['tau'])
 
-        # Réorganise les paramètres
+        # Réorganise les paramètres dans format bloc:
+        # [A1, A2, ..., An, tau1, tau2, ..., taun, T1, T2, ..., Tn]
         self.params = np.array(
             [mode['A'] for mode in modes_sorted] +
             [mode['tau'] for mode in modes_sorted] +
             [mode['T'] for mode in modes_sorted]
         )
+
+    def _intensity_sorted(self, t):
+        """
+        Calcule l'intensité avec paramètres triés (format bloc).
+
+        Format: [A1...An, tau1...taun, T1...Tn]
+        """
+        intensity = np.zeros_like(t, dtype=float)
+        for i in range(self.n_modes):
+            A = self.params[i]
+            tau = self.params[self.n_modes + i]
+            T = self.params[2 * self.n_modes + i]
+            x = (t - tau) / (2.0 * T)
+            intensity += A * (1.0 / np.cosh(x))**2
+        return intensity
 
     def predict(self, t):
         """
@@ -118,7 +141,8 @@ class SuperRadiantModel:
         """
         if self.params is None:
             raise ValueError("Le modèle doit d'abord être ajusté avec fit()")
-        return self.intensity(t, *self.params)
+        # Utiliser _intensity_sorted car params a été réorganisé par _sort_modes
+        return self._intensity_sorted(t)
 
     def get_mode_parameters(self):
         """
@@ -139,6 +163,28 @@ class SuperRadiantModel:
                 'T': self.params[2 * self.n_modes + i]
             })
         return modes
+
+    def get_mode_intensity(self, t, mode_index):
+        """
+        Retourne l'intensité d'un mode spécifique.
+
+        Args:
+            t (array): Temps
+            mode_index (int): Index du mode (0 à n_modes-1)
+
+        Returns:
+            array: Intensité du mode spécifié
+        """
+        if self.params is None:
+            raise ValueError("Le modèle doit d'abord être ajusté avec fit()")
+        if mode_index < 0 or mode_index >= self.n_modes:
+            raise ValueError(f"mode_index doit être entre 0 et {self.n_modes-1}")
+
+        A = self.params[mode_index]
+        tau = self.params[self.n_modes + mode_index]
+        T = self.params[2 * self.n_modes + mode_index]
+        x = (t - tau) / (2.0 * T)
+        return A * (1.0 / np.cosh(x))**2
 
 
 class SIRModel:
