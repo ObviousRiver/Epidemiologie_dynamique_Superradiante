@@ -34,11 +34,17 @@ covid_data/
 *.csv
 *.zip
 
-# Figures and reports
+# Figures and reports (but allow reports/ directory)
 *.png
 *.pdf
 *.jpg
 *.jpeg
+
+# Exception: allow reports in reports/ directory
+!reports/*.png
+!reports/*.pdf
+!reports/*.jpg
+!reports/*.jpeg
 
 # Kaggle
 kaggle.json
