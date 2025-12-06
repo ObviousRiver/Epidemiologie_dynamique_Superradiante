@@ -380,7 +380,7 @@ Si vous utilisez ce travail dans vos recherches, merci de citer :
 @software{epidemiologie_superradiante_2024,
   title = {Épidémiologie Dynamique Super-Radiante},
   author = {ObviousRiver},
-  year = {2024},
+  year = {2025},
   url = {https://github.com/ObviousRiver/Epidemiologie_dynamique_Superradiante},
   note = {Étude comparative de 10 pays européens - COVID-19 Vague 1}
 }
