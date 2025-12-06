@@ -5,9 +5,14 @@ Analyse de l'exposant critique γ (susceptibilité) - Méthode Physique
 
 Méthode correcte basée sur la physique des transitions de phase :
 - Distance critique : ε = |t - t_c| où t_c est le pic de variance
-- Susceptibilité : χ(t) = variance glissante des nouveaux cas
+- Susceptibilité : χ(t) = variance glissante des NOUVEAUX DÉCÈS (lissés 7j)
 - Loi de puissance : χ(t) ∼ |t - t_c|^(-γ)
 - Régression log-log sur la partie ASCENDANTE : ln(χ) = -γ ln(ε) + C
+
+IMPORTANT : Utilise les DÉCÈS ('dc') comme dans l'analyse originale,
+pas les hospitalisations ('hosp'). Les nouveaux décès sont lissés sur
+7 jours (rolling mean) pour réduire le bruit, puis la variance glissante
+est calculée sur cette série lissée.
 
 L'exposant γ doit être POSITIF et comparable aux classes d'universalité :
 - Ising 3D : γ ≈ 1.24
@@ -47,8 +52,11 @@ def load_department_data(df_hosp, dep_code):
     df_daily['jour'] = pd.to_datetime(df_daily['jour'])
     df_daily = df_daily.sort_values('jour')
 
-    # Calculer les nouveaux cas (approximation via hospitalisations)
-    df_daily['nouveaux_cas'] = df_daily['hosp'].diff().fillna(0)
+    # Calculer les nouveaux décès quotidiens (comme dans l'analyse originale)
+    df_daily['nouveaux_deces'] = df_daily['dc'].diff().fillna(0)
+
+    # Lissage sur 7 jours (rolling mean) pour réduire le bruit
+    df_daily['nouveaux_deces_smooth'] = df_daily['nouveaux_deces'].rolling(window=7, center=True).mean().fillna(0)
 
     return df_daily
 
@@ -169,7 +177,7 @@ def analyze_all_departments():
                 continue
 
             # Calculer variance glissante (susceptibilité)
-            df_dep['variance'] = calculate_rolling_variance(df_dep['nouveaux_cas'], window=WINDOW_SIZE)
+            df_dep['variance'] = calculate_rolling_variance(df_dep['nouveaux_deces_smooth'], window=WINDOW_SIZE)
 
             # Trouver pic de variance (point critique)
             peak_idx = find_variance_peak(df_dep['variance'])
@@ -190,8 +198,8 @@ def analyze_all_departments():
             if gamma is None:
                 continue
 
-            # Pic de nouveaux cas (pour comparaison)
-            cases_peak_idx = df_dep['nouveaux_cas'].idxmax()
+            # Pic de nouveaux décès (pour comparaison)
+            cases_peak_idx = df_dep['nouveaux_deces_smooth'].idxmax()
             cases_peak_day = df_dep.loc[cases_peak_idx, 'jour']
 
             # Avance temporelle du pic de variance
@@ -245,10 +253,15 @@ def analyze_specific_regions(df_hosp):
 
         df_daily['jour'] = pd.to_datetime(df_daily['jour'])
         df_daily = df_daily.sort_values('jour').reset_index(drop=True)
-        df_daily['nouveaux_cas'] = df_daily['hosp'].diff().fillna(0)
+
+        # Calculer les nouveaux décès quotidiens (comme dans l'analyse originale)
+        df_daily['nouveaux_deces'] = df_daily['dc'].diff().fillna(0)
+
+        # Lissage sur 7 jours (rolling mean) pour réduire le bruit
+        df_daily['nouveaux_deces_smooth'] = df_daily['nouveaux_deces'].rolling(window=7, center=True).mean().fillna(0)
 
         # Variance glissante
-        df_daily['variance'] = calculate_rolling_variance(df_daily['nouveaux_cas'], window=WINDOW_SIZE)
+        df_daily['variance'] = calculate_rolling_variance(df_daily['nouveaux_deces_smooth'], window=WINDOW_SIZE)
 
         # Pic de variance
         peak_idx = find_variance_peak(df_daily['variance'])
@@ -270,12 +283,12 @@ def analyze_specific_regions(df_hosp):
         else:
             print(f"  ⚠ Régression échouée (données insuffisantes)")
 
-        # Pic de cas
-        cases_peak_idx = df_daily['nouveaux_cas'].idxmax()
-        cases_peak_day = df_daily.loc[cases_peak_idx, 'jour']
-        advance_days = (cases_peak_day - peak_day).days
+        # Pic de décès
+        deaths_peak_idx = df_daily['nouveaux_deces_smooth'].idxmax()
+        deaths_peak_day = df_daily.loc[deaths_peak_idx, 'jour']
+        advance_days = (deaths_peak_day - peak_day).days
 
-        print(f"  Pic des cas : {cases_peak_day.strftime('%Y-%m-%d')} (J{cases_peak_idx})")
+        print(f"  Pic des décès : {deaths_peak_day.strftime('%Y-%m-%d')} (J{deaths_peak_idx})")
         print(f"  Avance du signal : +{advance_days} jours")
 
 def plot_results(df_results):
