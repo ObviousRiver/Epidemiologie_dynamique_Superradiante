@@ -22,6 +22,7 @@ import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit, differential_evolution
 from scipy.integrate import odeint
 from scipy.fft import fft, fftfreq
+from scipy.stats import linregress
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -74,19 +75,22 @@ POPULATIONS_REGIONS = {
 # CHARGEMENT DONNÉES SPF
 # ============================================================================
 
-def load_spf_data(start_date='2020-02-15', end_date='2020-06-30'):
+def load_spf_data(start_date='2020-02-15', end_date='2020-06-30', data_file='data/covid-hospit-incid-2023-03-31-18h01.csv'):
     """
     Charge les données Santé Publique France (hospitalisations COVID-19).
 
-    Returns:
-        DataFrame avec colonnes: date, dep, dc (décès cumulés)
-    """
-    url = 'https://www.data.gouv.fr/fr/datasets/r/63352e38-d353-4b54-ad16-5fe1351110a4'
+    Args:
+        start_date: Date début (défaut: 2020-02-15)
+        end_date: Date fin (défaut: 2020-06-30)
+        data_file: Chemin fichier local (défaut: data/covid-hospit-incid-2023-03-31-18h01.csv)
 
-    print("📥 Chargement données Santé Publique France...")
+    Returns:
+        DataFrame avec colonnes: date, dep, incid_dc (nouveaux décès quotidiens)
+    """
+    print(f"📥 Chargement données SPF depuis fichier local: {data_file}")
 
     try:
-        df = pd.read_csv(url, sep=';', low_memory=False)
+        df = pd.read_csv(data_file, sep=';', low_memory=False)
         print(f"✅ Données SPF chargées : {len(df):,} lignes")
 
         # Convertir date
@@ -133,21 +137,15 @@ def extract_departement_deaths(df, dept_code):
     if len(dept_data) == 0:
         return None, None, None
 
-    # Grouper par date (sexe = 0 = tous)
-    if 'sexe' in dept_data.columns:
-        dept_data = dept_data[dept_data['sexe'] == 0]
-
-    daily = dept_data.groupby('jour')['dc'].sum().sort_index()
+    # Grouper par date - incid_dc est déjà les nouveaux décès quotidiens
+    daily = dept_data.groupby('jour')['incid_dc'].sum().sort_index()
 
     # Créer série complète
     dates = pd.date_range('2020-02-15', '2020-06-30', freq='D')
     daily = daily.reindex(dates, fill_value=0)
 
-    # Décès quotidiens (dérivée)
-    daily_new = daily.diff().fillna(0)
-
     # Lisser 7 jours
-    daily_smooth = daily_new.rolling(window=7, center=True).mean().fillna(0)
+    daily_smooth = daily.rolling(window=7, center=True).mean().fillna(0)
 
     # Valeurs négatives → 0 (corrections administratives)
     daily_smooth = daily_smooth.clip(lower=0)
@@ -169,17 +167,13 @@ def extract_region_deaths(df, region_name):
     if len(region_data) == 0:
         return None, None, None
 
-    # Grouper par date
-    if 'sexe' in region_data.columns:
-        region_data = region_data[region_data['sexe'] == 0]
-
-    daily = region_data.groupby('jour')['dc'].sum().sort_index()
+    # Grouper par date - incid_dc est déjà les nouveaux décès quotidiens
+    daily = region_data.groupby('jour')['incid_dc'].sum().sort_index()
 
     dates = pd.date_range('2020-02-15', '2020-06-30', freq='D')
     daily = daily.reindex(dates, fill_value=0)
 
-    daily_new = daily.diff().fillna(0)
-    daily_smooth = daily_new.rolling(window=7, center=True).mean().fillna(0)
+    daily_smooth = daily.rolling(window=7, center=True).mean().fillna(0)
     daily_smooth = daily_smooth.clip(lower=0)
 
     t_data = np.arange(len(dates))
@@ -192,24 +186,100 @@ def extract_national_deaths(df):
     """
     Agrège les décès pour la France entière.
     """
-    # Grouper par date
-    df_copy = df.copy()
-    if 'sexe' in df_copy.columns:
-        df_copy = df_copy[df_copy['sexe'] == 0]
-
-    daily = df_copy.groupby('jour')['dc'].sum().sort_index()
+    # Grouper par date - incid_dc est déjà les nouveaux décès quotidiens
+    daily = df.groupby('jour')['incid_dc'].sum().sort_index()
 
     dates = pd.date_range('2020-02-15', '2020-06-30', freq='D')
     daily = daily.reindex(dates, fill_value=0)
 
-    daily_new = daily.diff().fillna(0)
-    daily_smooth = daily_new.rolling(window=7, center=True).mean().fillna(0)
+    daily_smooth = daily.rolling(window=7, center=True).mean().fillna(0)
     daily_smooth = daily_smooth.clip(lower=0)
 
     t_data = np.arange(len(dates))
     y_data = daily_smooth.values
 
     return t_data, y_data, dates
+
+
+# ============================================================================
+# CALCUL EXPOSANT CRITIQUE γ
+# ============================================================================
+
+def calculate_susceptibility(y_signal, window=21):
+    """
+    Calcule la susceptibilité dynamique χ(t) = rolling variance.
+
+    Args:
+        y_signal: Signal temporel (décès quotidiens)
+        window: Fenêtre rolling (jours)
+
+    Returns:
+        t_chi, chi (temps, susceptibilité)
+    """
+    chi = []
+    t_chi = []
+
+    for i in range(window, len(y_signal)):
+        segment = y_signal[i-window:i]
+        variance = np.var(segment)
+        chi.append(variance)
+        t_chi.append(i)
+
+    return np.array(t_chi), np.array(chi)
+
+
+def extract_gamma(t_chi, chi, visualize=False, location_name=""):
+    """
+    Extrait l'exposant critique γ par régression log-log.
+
+    Méthode :
+    1. Identifier t_c (pic de susceptibilité)
+    2. Prendre phase ascendante (t < t_c)
+    3. Régresser log(χ) vs log(|t - t_c|)
+    4. Pente = -γ
+
+    Returns:
+        gamma, t_c, R²
+    """
+    if len(chi) == 0 or np.max(chi) < 1e-6:
+        return np.nan, np.nan, np.nan
+
+    # 1. Identifier t_c (pic)
+    t_c_idx = np.argmax(chi)
+    t_c = t_chi[t_c_idx]
+    chi_max = chi[t_c_idx]
+
+    # 2. Phase ascendante (avant pic)
+    ascending = (t_chi < t_c) & (t_chi > t_c - 30)  # 30 jours avant pic
+
+    if np.sum(ascending) < 5:
+        return np.nan, t_c, np.nan
+
+    t_asc = t_chi[ascending]
+    chi_asc = chi[ascending]
+
+    # Filtrer χ > 0
+    valid = chi_asc > 1e-6
+    t_asc = t_asc[valid]
+    chi_asc = chi_asc[valid]
+
+    if len(t_asc) < 5:
+        return np.nan, t_c, np.nan
+
+    # 3. Distance au point critique
+    epsilon = np.abs(t_asc - t_c)
+
+    # Logarithmes
+    log_epsilon = np.log(epsilon)
+    log_chi = np.log(chi_asc)
+
+    # 4. Régression linéaire
+    slope, intercept, r_value, p_value, std_err = linregress(log_epsilon, log_chi)
+
+    gamma = -slope  # χ ∼ ε^(-γ) → log(χ) = -γ log(ε) + const
+    R2 = r_value**2
+
+    return gamma, t_c, R2
 
 
 # ============================================================================
@@ -443,6 +513,16 @@ def analyze_location(t_data, y_data, location_name, population, output_file=None
         ratio = np.nan
         winner = "Indéterminé"
 
+    # Exposant critique γ
+    print(f"\n📈 Calcul exposant critique γ...")
+    t_chi, chi = calculate_susceptibility(y_data, window=21)
+    gamma, t_c_gamma, R2_gamma = extract_gamma(t_chi, chi, visualize=False, location_name=location_name)
+
+    if not np.isnan(gamma):
+        print(f"   γ = {gamma:.3f}, t_c = {t_c_gamma:.0f} j, R² = {R2_gamma:.3f}")
+    else:
+        print(f"   ⚠️  Calcul γ échoué (données insuffisantes)")
+
     # Résultats
     results = {
         'location': location_name,
@@ -456,7 +536,10 @@ def analyze_location(t_data, y_data, location_name, population, output_file=None
         'params_sr': params_sr,
         'fit_sr': fit_sr,
         'params_sir': params_sir,
-        'fit_sir': fit_sir
+        'fit_sir': fit_sir,
+        'gamma': gamma,
+        't_c_gamma': t_c_gamma,
+        'R2_gamma': R2_gamma
     }
 
     return results
@@ -501,10 +584,10 @@ def analyze_france_multiscale(df_spf, sample_depts=None, output_dir='results/fra
 
     print(f"   Départements à analyser : {len(depts_to_analyze)}")
 
-    for dept_code in depts_to_analyze[:10]:  # Limiter à 10 pour test
+    for dept_code in depts_to_analyze:
         t_data, y_data, dates = extract_departement_deaths(df_spf, dept_code)
 
-        if t_data is None or np.max(y_data) < 1.0:
+        if t_data is None or np.max(y_data) < 0.5:
             continue
 
         # Population département (estimation grossière)
@@ -574,12 +657,10 @@ def main():
         print("❌ Impossible de charger les données SPF")
         return
 
-    # Analyser multi-échelle (sample pour test)
-    sample_depts = ['67', '68', '75', '92', '93', '13', '69']  # Grand Est, IdF, PACA, ARA
-
+    # Analyser multi-échelle (TOUS les départements)
     results = analyze_france_multiscale(
         df_spf,
-        sample_depts=sample_depts,
+        sample_depts=None,  # Analyser tous les départements
         output_dir='results/france_multiscale'
     )
 
@@ -592,6 +673,72 @@ def main():
     print(f"   Départements analysés : {len(results['departements'])}")
     print(f"   Régions analysées : {len(results['regions'])}")
     print(f"   National : {'✅' if results['national'] else '❌'}")
+
+    # Sauvegarder résultats en CSV
+    import os
+    os.makedirs('results', exist_ok=True)
+
+    # Départements
+    if len(results['departements']) > 0:
+        dept_data = []
+        for dept_code, res in results['departements'].items():
+            dept_data.append({
+                'departement': dept_code,
+                'population': res['population'],
+                'max_deaths': res['max_deaths'],
+                'rms_sr': res['rms_sr'],
+                'rms_sir': res['rms_sir'],
+                'ratio': res['ratio'],
+                'winner': res['winner'],
+                'n_modes_sr': res['n_modes_sr'],
+                'gamma': res['gamma'],
+                't_c_gamma': res['t_c_gamma'],
+                'R2_gamma': res['R2_gamma']
+            })
+        df_dept = pd.DataFrame(dept_data)
+        df_dept.to_csv('results/france_departements_consolidee.csv', index=False)
+        print(f"\n✅ Résultats départements sauvegardés : results/france_departements_consolidee.csv")
+
+    # Régions
+    if len(results['regions']) > 0:
+        region_data = []
+        for region_name, res in results['regions'].items():
+            region_data.append({
+                'region': region_name,
+                'population': res['population'],
+                'max_deaths': res['max_deaths'],
+                'rms_sr': res['rms_sr'],
+                'rms_sir': res['rms_sir'],
+                'ratio': res['ratio'],
+                'winner': res['winner'],
+                'n_modes_sr': res['n_modes_sr'],
+                'gamma': res['gamma'],
+                't_c_gamma': res['t_c_gamma'],
+                'R2_gamma': res['R2_gamma']
+            })
+        df_region = pd.DataFrame(region_data)
+        df_region.to_csv('results/france_regions_consolidee.csv', index=False)
+        print(f"✅ Résultats régions sauvegardés : results/france_regions_consolidee.csv")
+
+    # National
+    if results['national'] is not None:
+        res = results['national']
+        national_data = [{
+            'pays': 'France',
+            'population': res['population'],
+            'max_deaths': res['max_deaths'],
+            'rms_sr': res['rms_sr'],
+            'rms_sir': res['rms_sir'],
+            'ratio': res['ratio'],
+            'winner': res['winner'],
+            'n_modes_sr': res['n_modes_sr'],
+            'gamma': res['gamma'],
+            't_c_gamma': res['t_c_gamma'],
+            'R2_gamma': res['R2_gamma']
+        }]
+        df_national = pd.DataFrame(national_data)
+        df_national.to_csv('results/france_national_consolidee.csv', index=False)
+        print(f"✅ Résultats national sauvegardés : results/france_national_consolidee.csv")
 
 
 if __name__ == "__main__":
