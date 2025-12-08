@@ -188,5 +188,68 @@ Remplacer le tableau actuel par les **vraies valeurs consolidées** du document 
 
 ---
 
-**Statut** : Branche `verification-chiffres` créée, prête pour corrections
-**Prochaine étape** : Décision Option A ou B
+**Statut** : ✅ Vérification Option B terminée - Chiffres consolidés confirmés
+**Prochaine étape** : Corriger README.md avec valeurs vérifiées
+
+---
+
+## ✅ RÉSULTATS VÉRIFICATION (Option B - Complète)
+
+**Date** : 8 décembre 2025
+**Script** : `scripts/verify_key_countries.py`
+**Méthode** : Relance complète des analyses (téléchargement données JHU + fits SR/SIR)
+
+### Vérification des 4 Pays Clés
+
+| Pays | Ratio Recalculé | Ratio Document | Ancien README | Écart | Status |
+|------|-----------------|----------------|---------------|-------|--------|
+| **Italie** | **7.32×** | 7.30× ✅ | 27.92× ❌ | +0.3% | ✅ **VÉRIFIÉ** |
+| **France** | **2.08×** | 2.10× ✅ | 14.88× ❌ | -1.0% | ✅ **VÉRIFIÉ** |
+| **Pays-Bas** | **10.19×** | 10.20× ✅ | N/A | -0.1% | ✅ **VÉRIFIÉ** |
+| **UK** | **0.45×** | 0.45× ✅ | N/A | +0.6% | ✅ **VÉRIFIÉ** |
+
+### Détails Vérification
+
+#### 🇮🇹 Italie
+```
+RMS SR  (4 modes) : 10.11   (ref: 10.11, Δ= +0.0%)
+RMS SIR          : 74.01   (ref: 74.01, Δ= -0.0%)
+Ratio SIR/SR     :  7.32×  (ref:  7.30×, Δ= +0.3%)
+
+⚠️  README actuel (FAUX) : 27.92×
+✅  Document consolidé   : 7.30×
+📊  Valeur recalculée    : 7.32×
+```
+
+#### 🇫🇷 France
+```
+RMS SR  (3 modes) : 22.58   (ref: 22.58, Δ= -0.0%)
+RMS SIR          : 46.94   (ref: 46.94, Δ= -0.0%)
+Ratio SIR/SR     :  2.08×  (ref:  2.10×, Δ= -1.0%)
+
+⚠️  README actuel (FAUX) : 14.88×
+✅  Document consolidé   : 2.10×
+📊  Valeur recalculée    : 2.08×
+```
+
+#### 🇳🇱 Pays-Bas (VRAI CHAMPION)
+```
+RMS SR  (4 modes) :  2.58   (ref:  2.58, Δ= -0.0%)
+RMS SIR          : 26.27   (ref: 26.27, Δ= +0.0%)
+Ratio SIR/SR     : 10.19×  (ref: 10.20×, Δ= -0.1%)
+```
+
+#### 🇬🇧 UK (Seul cas SIR gagnant)
+```
+RMS SR  (3 modes) : 18.79   (ref: 18.79, Δ= +0.0%)
+RMS SIR          :  8.51   (ref:  8.51, Δ= -0.0%)
+Ratio SIR/SR     :  0.45×  (ref:  0.45×, Δ= +0.6%)
+```
+
+### Conclusions Vérification
+
+1. ✅ **Document consolidé CONFIRMÉ** : Tous les écarts < 1% → valeurs exactes
+2. ❌ **README ERRONÉ** : Ratios 27.92× (Italie) et 14.88× (France) proviennent de l'ancienne normalisation 0-1
+3. ✅ **Pays-Bas = VRAI champion** (10.2×), pas l'Italie (7.3×)
+4. ✅ **Méthodologie consolidée validée** : Valeurs absolues + IFR explicite
+5. ✅ **Reproductibilité confirmée** : Recalcul depuis données JHU donne résultats identiques
