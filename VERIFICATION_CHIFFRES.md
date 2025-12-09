@@ -188,5 +188,189 @@ Remplacer le tableau actuel par les **vraies valeurs consolidées** du document 
 
 ---
 
-**Statut** : Branche `verification-chiffres` créée, prête pour corrections
-**Prochaine étape** : Décision Option A ou B
+**Statut** : ✅ Vérification Option B terminée - Chiffres consolidés confirmés
+**Prochaine étape** : Corriger README.md avec valeurs vérifiées
+
+---
+
+## ✅ RÉSULTATS VÉRIFICATION (Option B - Complète)
+
+**Date** : 8 décembre 2025
+**Script** : `scripts/verify_key_countries.py`
+**Méthode** : Relance complète des analyses (téléchargement données JHU + fits SR/SIR)
+
+### Vérification des 4 Pays Clés
+
+| Pays | Ratio Recalculé | Ratio Document | Ancien README | Écart | Status |
+|------|-----------------|----------------|---------------|-------|--------|
+| **Italie** | **7.32×** | 7.30× ✅ | 27.92× ❌ | +0.3% | ✅ **VÉRIFIÉ** |
+| **France** | **2.08×** | 2.10× ✅ | 14.88× ❌ | -1.0% | ✅ **VÉRIFIÉ** |
+| **Pays-Bas** | **10.19×** | 10.20× ✅ | N/A | -0.1% | ✅ **VÉRIFIÉ** |
+| **UK** | **0.45×** | 0.45× ✅ | N/A | +0.6% | ✅ **VÉRIFIÉ** |
+
+### Détails Vérification
+
+#### 🇮🇹 Italie
+```
+RMS SR  (4 modes) : 10.11   (ref: 10.11, Δ= +0.0%)
+RMS SIR          : 74.01   (ref: 74.01, Δ= -0.0%)
+Ratio SIR/SR     :  7.32×  (ref:  7.30×, Δ= +0.3%)
+
+⚠️  README actuel (FAUX) : 27.92×
+✅  Document consolidé   : 7.30×
+📊  Valeur recalculée    : 7.32×
+```
+
+#### 🇫🇷 France
+```
+RMS SR  (3 modes) : 22.58   (ref: 22.58, Δ= -0.0%)
+RMS SIR          : 46.94   (ref: 46.94, Δ= -0.0%)
+Ratio SIR/SR     :  2.08×  (ref:  2.10×, Δ= -1.0%)
+
+⚠️  README actuel (FAUX) : 14.88×
+✅  Document consolidé   : 2.10×
+📊  Valeur recalculée    : 2.08×
+```
+
+#### 🇳🇱 Pays-Bas (VRAI CHAMPION)
+```
+RMS SR  (4 modes) :  2.58   (ref:  2.58, Δ= -0.0%)
+RMS SIR          : 26.27   (ref: 26.27, Δ= +0.0%)
+Ratio SIR/SR     : 10.19×  (ref: 10.20×, Δ= -0.1%)
+```
+
+#### 🇬🇧 UK (Seul cas SIR gagnant)
+```
+RMS SR  (3 modes) : 18.79   (ref: 18.79, Δ= +0.0%)
+RMS SIR          :  8.51   (ref:  8.51, Δ= -0.0%)
+Ratio SIR/SR     :  0.45×  (ref:  0.45×, Δ= +0.6%)
+```
+
+### Conclusions Vérification
+
+1. ✅ **Document consolidé CONFIRMÉ** : Tous les écarts < 1% → valeurs exactes
+2. ❌ **README ERRONÉ** : Ratios 27.92× (Italie) et 14.88× (France) proviennent de l'ancienne normalisation 0-1
+3. ✅ **Pays-Bas = VRAI champion** (10.2×), pas l'Italie (7.3×)
+4. ✅ **Méthodologie consolidée validée** : Valeurs absolues + IFR explicite
+5. ✅ **Reproductibilité confirmée** : Recalcul depuis données JHU donne résultats identiques
+
+---
+
+## ✅ VÉRIFICATION COMPLÈTE 19 PAYS (Extension Option B)
+
+**Date** : 8 décembre 2025
+**Script** : `scripts/verify_19_countries_rms.py`
+**Méthode** : Relance complète des analyses sur les 19 pays
+
+### Statistiques Globales
+
+| Métrique | Valeur | Status |
+|----------|--------|--------|
+| **Pays avec écart ratio < 10%** | **17/19 (89%)** | ✅ Excellent |
+| **Pays européens écart < 3%** | **15/15 (100%)** | ✅ Parfait |
+| **Écart moyen RMS SR** | **0.2%** | ✅ Quasi-parfait |
+| **Écart moyen ratio** | **6.8%** | ✅ Bon |
+
+### Résultats Détaillés par Pays
+
+#### 🇪🇺 15 Pays Européens : TOUS VALIDÉS ✅
+
+| Pays | Ratio Calculé | Ratio Ref | Écart Ratio | Status |
+|------|---------------|-----------|-------------|--------|
+| **Netherlands** | 10.19× | 10.20× | -0.1% | ✅ |
+| **Switzerland** | 8.43× | 8.40× | +0.3% | ✅ |
+| **Italy** | 7.32× | 7.30× | +0.3% | ✅ |
+| **Germany** | 5.37× | 5.40× | -0.5% | ✅ |
+| **Ireland** | 2.85× | 2.90× | -1.6% | ✅ |
+| **Belgium** | 2.73× | 2.70× | +1.2% | ✅ |
+| **Austria** | 2.72× | 2.70× | +0.7% | ✅ |
+| **Finland** | 2.60× | 2.60× | -0.2% | ✅ |
+| **Norway** | 2.47× | 2.50× | -1.2% | ✅ |
+| **Denmark** | 2.16× | 2.20× | -1.6% | ✅ |
+| **France** | 2.08× | 2.10× | -1.0% | ✅ |
+| **Portugal** | 1.92× | 1.90× | +1.0% | ✅ |
+| **Spain** | 1.47× | 1.50× | -2.2% | ✅ |
+| **Sweden** | 1.47× | 1.50× | -1.9% | ✅ |
+| **United Kingdom** | 0.45× | 0.45× | +0.6% | ✅ |
+
+**Conclusion Europe** : **100% validé** - Tous les écarts < 3% confirment que le document consolidé est exact.
+
+#### 🌎 4 Pays Anglo-Saxons : 2 Écarts Significatifs
+
+| Pays | Ratio Calculé | Ratio Ref | Écart Ratio | Status |
+|------|---------------|-----------|-------------|--------|
+| **USA** | 3.99× | 4.13× | -3.5% | ✅ Acceptable |
+| **Australia** | 2.89× | 2.80× | +3.2% | ✅ Acceptable |
+| **Canada** | **2.76×** | **7.30×** | **-62.2%** | ⚠️ Écart majeur |
+| **New Zealand** | **2.40×** | **4.40×** | **-45.5%** | ⚠️ Écart majeur |
+
+### Analyse des Écarts Canada & Nouvelle-Zélande
+
+#### 🇨🇦 Canada
+```
+RMS SR  : 3.69 (ref: 3.69) → Écart 0.0% ✅
+RMS SIR : 10.17 (ref: 26.92) → Écart -62.2% ⚠️
+Ratio   : 2.76× (ref: 7.30×)
+```
+
+**Observation** :
+- SR identique (reproductibilité parfaite)
+- SIR beaucoup meilleur (10.17 vs 26.92)
+- Canada reste SR dominant, mais moins spectaculaire
+
+#### 🇳🇿 Nouvelle-Zélande
+```
+RMS SR  : 0.07 (ref: 0.07) → Écart -0.6% ✅
+RMS SIR : 0.17 (ref: 0.31) → Écart -46.2% ⚠️
+Ratio   : 2.40× (ref: 4.40×)
+```
+
+**Observation** :
+- SR identique (reproductibilité parfaite)
+- SIR beaucoup meilleur (0.17 vs 0.31)
+- Nouvelle-Zélande reste SR dominant, mais ratio réduit
+
+### Hypothèses sur les Écarts
+
+**Pattern commun aux 2 pays** :
+- ✅ RMS SR **stable** et reproductible
+- ⚠️ RMS SIR **beaucoup plus bas** qu'initialement
+
+**Explications possibles** :
+1. **Optimisation SIR améliorée** : Convergence vers meilleur minimum local
+2. **Sensibilité aux petits nombres** : NZ = stratégie zéro COVID → très peu de décès
+3. **Données JHU mises à jour** : Révisions possibles depuis analyse originale
+4. **Initialisation différente** : Paramètres de départ de l'optimisation
+
+### Conclusions Scientifiques
+
+#### ✅ Validations Confirmées
+
+1. **15/15 pays européens parfaitement reproductibles** (< 3%)
+2. **Document consolidé = source de vérité** pour l'Europe
+3. **Méthodologie SR robuste** : Reproductibilité parfaite (écart < 1%)
+4. **18/19 pays (95%) : SR meilleur que SIR** (conclusion inchangée)
+5. **UK seul cas où SIR gagne** (0.45×) confirmé
+
+#### ⚠️ Points à Décider
+
+**Canada et Nouvelle-Zélande** : Deux options
+
+**Option A (Recommandée)** : Mettre à jour avec nouveaux ratios
+- Canada : 2.76× (au lieu de 7.30×)
+- Nouvelle-Zélande : 2.40× (au lieu de 4.40×)
+- Note : "Valeurs mises à jour après re-vérification complète (2025-12-08)"
+- **Avantage** : Transparence scientifique, reproductibilité
+- **Conclusion inchangée** : Restent SR dominants
+
+**Option B** : Garder anciennes valeurs + documenter variabilité
+- Conserver 7.30× et 4.40×
+- Ajouter note sur sensibilité optimisation SIR
+- **Avantage** : Stabilité historique
+- **Inconvénient** : Moins reproductible
+
+### Fichiers Générés
+
+- `verification_rms_20251208_175549.csv` : Résultats détaillés 19 pays
+- `verification_19_pays_output.log` : Log complet de l'exécution
+- Note : Ces fichiers sont ignorés par git (.gitignore) mais conservés localement
