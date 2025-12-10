@@ -353,6 +353,7 @@ class SIRModel:
                 y_data,
                 p0=p0,
                 bounds=(bounds_lower, bounds_upper),
+                method='dogbox',  # DOGBOX plus robuste que TRF pour minima locaux
                 maxfev=10000
             )
 
