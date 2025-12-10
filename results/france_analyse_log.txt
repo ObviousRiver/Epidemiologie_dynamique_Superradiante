@@ -1,0 +1,347 @@
+📥 Chargement données SPF depuis fichier local: data/covid-hospit-incid-2023-03-31-18h01.csv
+✅ Données SPF chargées : 113,016 lignes
+📊 Vague 1 (France métropolitaine) : 9,984 lignes
+   Départements uniques : 96
+   Période : 2020-03-19 00:00:00 → 2020-06-30 00:00:00
+
+================================================================================
+🇫🇷 ANALYSE MULTI-ÉCHELLE FRANCE - MÉTHODOLOGIE CONSOLIDÉE
+================================================================================
+
+📍 NIVEAU 1 : DÉPARTEMENTS
+--------------------------------------------------------------------------------
+   Départements à analyser : 96
+
+======================================================================
+🔍 Analyse : Département 01
+======================================================================
+   Max décès quotidiens : 3.3
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.17
+   SIR : RMS = 0.38
+         R0 = 1.10, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 2.29×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.946, t_c = 53 j, R² = 0.588
+
+======================================================================
+🔍 Analyse : Département 03
+======================================================================
+   Max décès quotidiens : 1.4
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.09
+   SIR : RMS = 0.24
+         R0 = 1.04, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 2.83×)
+
+📈 Calcul exposant critique γ...
+   γ = 0.426, t_c = 77 j, R² = 0.519
+
+======================================================================
+🔍 Analyse : Département 07
+======================================================================
+   Max décès quotidiens : 2.7
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.16
+   SIR : RMS = 0.42
+         R0 = 1.10, Durée infection = 1.5 jours
+
+🏆 Gagnant : SR (ratio = 2.62×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.256, t_c = 51 j, R² = 0.636
+
+======================================================================
+🔍 Analyse : Département 26
+======================================================================
+   Max décès quotidiens : 5.1
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.17
+   SIR : RMS = 0.45
+         R0 = 1.12, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 2.68×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.338, t_c = 48 j, R² = 0.593
+
+======================================================================
+🔍 Analyse : Département 38
+======================================================================
+   Max décès quotidiens : 4.6
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.17
+   SIR : RMS = 0.46
+         R0 = 1.13, Durée infection = 1.3 jours
+
+🏆 Gagnant : SR (ratio = 2.77×)
+
+📈 Calcul exposant critique γ...
+   γ = 0.155, t_c = 83 j, R² = 0.052
+
+======================================================================
+🔍 Analyse : Département 42
+======================================================================
+   Max décès quotidiens : 7.1
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.25
+   SIR : RMS = 0.76
+         R0 = 1.25, Durée infection = 2.5 jours
+
+🏆 Gagnant : SR (ratio = 3.06×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.184, t_c = 50 j, R² = 0.655
+
+======================================================================
+🔍 Analyse : Département 63
+======================================================================
+   Max décès quotidiens : 2.1
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.08
+   SIR : RMS = 0.37
+         R0 = 1.05, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 4.82×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.359, t_c = 56 j, R² = 0.711
+
+======================================================================
+🔍 Analyse : Département 69
+======================================================================
+   Max décès quotidiens : 17.4
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.59
+   SIR : RMS = 0.77
+         R0 = 7.00, Durée infection = 24.9 jours
+
+🏆 Gagnant : SR (ratio = 1.31×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.595, t_c = 47 j, R² = 0.710
+
+📍 NIVEAU 2 : RÉGIONS
+--------------------------------------------------------------------------------
+
+======================================================================
+🔍 Analyse : Auvergne-Rhône-Alpes
+======================================================================
+   Max décès quotidiens : 44.4
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.94
+   SIR : RMS = 4.22
+         R0 = 1.13, Durée infection = 1.3 jours
+
+🏆 Gagnant : SR (ratio = 4.50×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.974, t_c = 50 j, R² = 0.657
+
+======================================================================
+🔍 Analyse : Bourgogne-Franche-Comté
+======================================================================
+   Max décès quotidiens : 26.6
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 1.13
+   SIR : RMS = 2.22
+         R0 = 1.25, Durée infection = 2.4 jours
+
+🏆 Gagnant : SR (ratio = 1.97×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.779, t_c = 48 j, R² = 0.543
+
+======================================================================
+🔍 Analyse : Bretagne
+======================================================================
+   Max décès quotidiens : 8.4
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.25
+   SIR : RMS = 1.45
+         R0 = 1.06, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 5.80×)
+
+📈 Calcul exposant critique γ...
+   γ = 0.161, t_c = 76 j, R² = 0.094
+
+======================================================================
+🔍 Analyse : Centre-Val de Loire
+======================================================================
+   Max décès quotidiens : 13.0
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.51
+   SIR : RMS = 1.29
+         R0 = 1.12, Durée infection = 1.2 jours
+
+🏆 Gagnant : SR (ratio = 2.53×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.984, t_c = 51 j, R² = 0.606
+
+======================================================================
+🔍 Analyse : Grand Est
+======================================================================
+   Max décès quotidiens : 103.7
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 2.08
+   SIR : RMS = 9.59
+         R0 = 1.57, Durée infection = 4.2 jours
+
+🏆 Gagnant : SR (ratio = 4.61×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.111, t_c = 47 j, R² = 0.583
+
+======================================================================
+🔍 Analyse : Hauts-de-France
+======================================================================
+   Max décès quotidiens : 51.3
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 1.04
+   SIR : RMS = 4.62
+         R0 = 1.18, Durée infection = 1.7 jours
+
+🏆 Gagnant : SR (ratio = 4.43×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.765, t_c = 52 j, R² = 0.663
+
+======================================================================
+🔍 Analyse : Île-de-France
+======================================================================
+   Max décès quotidiens : 217.7
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 3.11
+   SIR : RMS = 14.06
+         R0 = 1.52, Durée infection = 3.9 jours
+
+🏆 Gagnant : SR (ratio = 4.51×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.450, t_c = 52 j, R² = 0.626
+
+======================================================================
+🔍 Analyse : Normandie
+======================================================================
+   Max décès quotidiens : 14.3
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.31
+   SIR : RMS = 1.66
+         R0 = 1.09, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 5.39×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.558, t_c = 54 j, R² = 0.674
+
+======================================================================
+🔍 Analyse : Nouvelle-Aquitaine
+======================================================================
+   Max décès quotidiens : 12.1
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.36
+   SIR : RMS = 2.14
+         R0 = 1.05, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 5.87×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.952, t_c = 49 j, R² = 0.581
+
+======================================================================
+🔍 Analyse : Occitanie
+======================================================================
+   Max décès quotidiens : 13.3
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.53
+   SIR : RMS = 1.92
+         R0 = 1.06, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 3.62×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.263, t_c = 49 j, R² = 0.561
+
+======================================================================
+🔍 Analyse : Pays de la Loire
+======================================================================
+   Max décès quotidiens : 11.4
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.38
+   SIR : RMS = 1.50
+         R0 = 1.08, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 3.98×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.662, t_c = 49 j, R² = 0.622
+
+======================================================================
+🔍 Analyse : Provence-Alpes-Côte d'Azur
+======================================================================
+   Max décès quotidiens : 24.9
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.53
+   SIR : RMS = 2.10
+         R0 = 1.11, Durée infection = 1.1 jours
+
+🏆 Gagnant : SR (ratio = 3.94×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.779, t_c = 52 j, R² = 0.646
+
+📍 NIVEAU 3 : NATIONAL
+--------------------------------------------------------------------------------
+
+======================================================================
+🔍 Analyse : France
+======================================================================
+   Max décès quotidiens : 530.7
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 7.42
+   SIR : RMS = 43.09
+         R0 = 1.17, Durée infection = 1.6 jours
+
+🏆 Gagnant : SR (ratio = 5.81×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.115, t_c = 50 j, R² = 0.615
+
+================================================================================
+✅ ANALYSE TERMINÉE
+================================================================================
+
+Résultats :
+   Départements analysés : 8
+   Régions analysées : 12
+   National : ✅
+
+✅ Résultats départements sauvegardés : results/france_departements_consolidee.csv
+✅ Résultats régions sauvegardés : results/france_regions_consolidee.csv
+✅ Résultats national sauvegardés : results/france_national_consolidee.csv

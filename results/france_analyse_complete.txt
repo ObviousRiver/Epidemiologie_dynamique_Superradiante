@@ -1,0 +1,1538 @@
+📥 Chargement données SPF depuis fichier local: data/covid-hospit-incid-2023-03-31-18h01.csv
+✅ Données SPF chargées : 113,016 lignes
+📊 Vague 1 (France métropolitaine) : 9,984 lignes
+   Départements uniques : 96
+   Période : 2020-03-19 00:00:00 → 2020-06-30 00:00:00
+
+================================================================================
+🇫🇷 ANALYSE MULTI-ÉCHELLE FRANCE - MÉTHODOLOGIE CONSOLIDÉE
+================================================================================
+
+📍 NIVEAU 1 : DÉPARTEMENTS
+--------------------------------------------------------------------------------
+   Départements à analyser : 96
+
+======================================================================
+🔍 Analyse : Département 01
+======================================================================
+   Max décès quotidiens : 3.3
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.17
+   SIR : RMS = 0.38
+         R0 = 1.10, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 2.29×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.946, t_c = 53 j, R² = 0.588
+
+======================================================================
+🔍 Analyse : Département 03
+======================================================================
+   Max décès quotidiens : 1.4
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.09
+   SIR : RMS = 0.24
+         R0 = 1.04, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 2.83×)
+
+📈 Calcul exposant critique γ...
+   γ = 0.426, t_c = 77 j, R² = 0.519
+
+======================================================================
+🔍 Analyse : Département 07
+======================================================================
+   Max décès quotidiens : 2.7
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.16
+   SIR : RMS = 0.42
+         R0 = 1.10, Durée infection = 1.5 jours
+
+🏆 Gagnant : SR (ratio = 2.62×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.256, t_c = 51 j, R² = 0.636
+
+======================================================================
+🔍 Analyse : Département 15
+======================================================================
+   Max décès quotidiens : 0.9
+   ⚠️  Données insuffisantes (max < 1 décès/jour)
+
+======================================================================
+🔍 Analyse : Département 26
+======================================================================
+   Max décès quotidiens : 5.1
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.17
+   SIR : RMS = 0.45
+         R0 = 1.12, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 2.68×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.338, t_c = 48 j, R² = 0.593
+
+======================================================================
+🔍 Analyse : Département 38
+======================================================================
+   Max décès quotidiens : 4.6
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.17
+   SIR : RMS = 0.46
+         R0 = 1.13, Durée infection = 1.3 jours
+
+🏆 Gagnant : SR (ratio = 2.77×)
+
+📈 Calcul exposant critique γ...
+   γ = 0.155, t_c = 83 j, R² = 0.052
+
+======================================================================
+🔍 Analyse : Département 42
+======================================================================
+   Max décès quotidiens : 7.1
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.25
+   SIR : RMS = 0.76
+         R0 = 1.25, Durée infection = 2.5 jours
+
+🏆 Gagnant : SR (ratio = 3.06×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.184, t_c = 50 j, R² = 0.655
+
+======================================================================
+🔍 Analyse : Département 63
+======================================================================
+   Max décès quotidiens : 2.1
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.08
+   SIR : RMS = 0.37
+         R0 = 1.05, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 4.82×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.359, t_c = 56 j, R² = 0.711
+
+======================================================================
+🔍 Analyse : Département 69
+======================================================================
+   Max décès quotidiens : 17.4
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.59
+   SIR : RMS = 0.77
+         R0 = 7.00, Durée infection = 24.9 jours
+
+🏆 Gagnant : SR (ratio = 1.31×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.595, t_c = 47 j, R² = 0.710
+
+======================================================================
+🔍 Analyse : Département 73
+======================================================================
+   Max décès quotidiens : 2.1
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.14
+   SIR : RMS = 0.38
+         R0 = 1.07, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 2.70×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.234, t_c = 51 j, R² = 0.780
+
+======================================================================
+🔍 Analyse : Département 74
+======================================================================
+   Max décès quotidiens : 5.4
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.23
+   SIR : RMS = 0.51
+         R0 = 1.15, Durée infection = 1.4 jours
+
+🏆 Gagnant : SR (ratio = 2.18×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.384, t_c = 50 j, R² = 0.605
+
+======================================================================
+🔍 Analyse : Département 21
+======================================================================
+   Max décès quotidiens : 7.7
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.44
+   SIR : RMS = 0.68
+         R0 = 1.12, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 1.53×)
+
+📈 Calcul exposant critique γ...
+   γ = 0.320, t_c = 81 j, R² = 0.178
+
+======================================================================
+🔍 Analyse : Département 25
+======================================================================
+   Max décès quotidiens : 3.6
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.28
+   SIR : RMS = 0.42
+         R0 = 1.32, Durée infection = 3.3 jours
+
+🏆 Gagnant : SR (ratio = 1.47×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.654, t_c = 48 j, R² = 0.546
+
+======================================================================
+🔍 Analyse : Département 39
+======================================================================
+   Max décès quotidiens : 2.7
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.11
+   SIR : RMS = 0.33
+         R0 = 1.11, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 3.09×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.564, t_c = 54 j, R² = 0.694
+
+======================================================================
+🔍 Analyse : Département 58
+======================================================================
+   Max décès quotidiens : 1.4
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.08
+   SIR : RMS = 0.25
+         R0 = 1.06, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 3.25×)
+
+📈 Calcul exposant critique γ...
+   γ = 0.423, t_c = 82 j, R² = 0.811
+
+======================================================================
+🔍 Analyse : Département 70
+======================================================================
+   Max décès quotidiens : 4.4
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.13
+   SIR : RMS = 0.43
+         R0 = 1.14, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 3.43×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.830, t_c = 50 j, R² = 0.730
+
+======================================================================
+🔍 Analyse : Département 71
+======================================================================
+   Max décès quotidiens : 5.4
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.25
+   SIR : RMS = 0.53
+         R0 = 1.51, Durée infection = 5.0 jours
+
+🏆 Gagnant : SR (ratio = 2.12×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.048, t_c = 47 j, R² = 0.572
+
+======================================================================
+🔍 Analyse : Département 89
+======================================================================
+   Max décès quotidiens : 2.4
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.19
+   SIR : RMS = 0.26
+         R0 = 1.16, Durée infection = 1.6 jours
+
+🏆 Gagnant : SR (ratio = 1.37×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.597, t_c = 58 j, R² = 0.815
+
+======================================================================
+🔍 Analyse : Département 90
+======================================================================
+   Max décès quotidiens : 5.9
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.31
+   SIR : RMS = 0.66
+         R0 = 1.38, Durée infection = 2.9 jours
+
+🏆 Gagnant : SR (ratio = 2.10×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.656, t_c = 45 j, R² = 0.524
+
+======================================================================
+🔍 Analyse : Département 22
+======================================================================
+   Max décès quotidiens : 1.4
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.11
+   SIR : RMS = 0.31
+         R0 = 1.03, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 2.86×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.027, t_c = 55 j, R² = 0.759
+
+======================================================================
+🔍 Analyse : Département 29
+======================================================================
+   Max décès quotidiens : 2.4
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.08
+   SIR : RMS = 0.42
+         R0 = 1.04, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 5.49×)
+
+📈 Calcul exposant critique γ...
+   γ = 0.819, t_c = 80 j, R² = 0.391
+
+======================================================================
+🔍 Analyse : Département 35
+======================================================================
+   Max décès quotidiens : 3.1
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.14
+   SIR : RMS = 0.46
+         R0 = 1.08, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 3.35×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.239, t_c = 57 j, R² = 0.696
+
+======================================================================
+🔍 Analyse : Département 56
+======================================================================
+   Max décès quotidiens : 3.3
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.17
+   SIR : RMS = 0.47
+         R0 = 1.08, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 2.85×)
+
+📈 Calcul exposant critique γ...
+   γ = -0.016, t_c = 71 j, R² = 0.001
+
+======================================================================
+🔍 Analyse : Département 18
+======================================================================
+   Max décès quotidiens : 2.4
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.19
+   SIR : RMS = 0.34
+         R0 = 1.11, Durée infection = 1.1 jours
+
+🏆 Gagnant : SR (ratio = 1.78×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.221, t_c = 51 j, R² = 0.646
+
+======================================================================
+🔍 Analyse : Département 28
+======================================================================
+   Max décès quotidiens : 3.4
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.26
+   SIR : RMS = 0.40
+         R0 = 1.19, Durée infection = 2.0 jours
+
+🏆 Gagnant : SR (ratio = 1.54×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.709, t_c = 52 j, R² = 0.446
+
+======================================================================
+🔍 Analyse : Département 36
+======================================================================
+   Max décès quotidiens : 2.7
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.13
+   SIR : RMS = 0.30
+         R0 = 1.11, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 2.35×)
+
+📈 Calcul exposant critique γ...
+   γ = 0.650, t_c = 85 j, R² = 0.779
+
+======================================================================
+🔍 Analyse : Département 37
+======================================================================
+   Max décès quotidiens : 2.9
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.14
+   SIR : RMS = 0.35
+         R0 = 1.11, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 2.41×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.272, t_c = 55 j, R² = 0.758
+
+======================================================================
+🔍 Analyse : Département 41
+======================================================================
+   Max décès quotidiens : 1.9
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.09
+   SIR : RMS = 0.22
+         R0 = 1.09, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 2.37×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.381, t_c = 52 j, R² = 0.683
+
+======================================================================
+🔍 Analyse : Département 45
+======================================================================
+   Max décès quotidiens : 2.9
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.12
+   SIR : RMS = 0.30
+         R0 = 1.14, Durée infection = 1.5 jours
+
+🏆 Gagnant : SR (ratio = 2.54×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.306, t_c = 50 j, R² = 0.701
+
+======================================================================
+🔍 Analyse : Département 2A
+======================================================================
+   Max décès quotidiens : 2.3
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.10
+   SIR : RMS = 0.26
+         R0 = 1.17, Durée infection = 1.3 jours
+
+🏆 Gagnant : SR (ratio = 2.52×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.115, t_c = 43 j, R² = 0.602
+
+======================================================================
+🔍 Analyse : Département 2B
+======================================================================
+   Max décès quotidiens : 0.6
+   ⚠️  Données insuffisantes (max < 1 décès/jour)
+
+======================================================================
+🔍 Analyse : Département 08
+======================================================================
+   Max décès quotidiens : 3.3
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.16
+   SIR : RMS = 0.47
+         R0 = 1.08, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 2.85×)
+
+📈 Calcul exposant critique γ...
+   γ = 0.340, t_c = 81 j, R² = 0.321
+
+======================================================================
+🔍 Analyse : Département 10
+======================================================================
+   Max décès quotidiens : 5.4
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.24
+   SIR : RMS = 0.61
+         R0 = 1.15, Durée infection = 1.2 jours
+
+🏆 Gagnant : SR (ratio = 2.59×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.024, t_c = 53 j, R² = 0.747
+
+======================================================================
+🔍 Analyse : Département 51
+======================================================================
+   Max décès quotidiens : 10.0
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.29
+   SIR : RMS = 0.68
+         R0 = 1.33, Durée infection = 2.4 jours
+
+🏆 Gagnant : SR (ratio = 2.35×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.363, t_c = 55 j, R² = 0.480
+
+======================================================================
+🔍 Analyse : Département 52
+======================================================================
+   Max décès quotidiens : 4.1
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.23
+   SIR : RMS = 0.57
+         R0 = 1.09, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 2.48×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.753, t_c = 54 j, R² = 0.892
+
+======================================================================
+🔍 Analyse : Département 54
+======================================================================
+   Max décès quotidiens : 10.3
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.59
+   SIR : RMS = 1.06
+         R0 = 1.64, Durée infection = 5.4 jours
+
+🏆 Gagnant : SR (ratio = 1.78×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.941, t_c = 50 j, R² = 0.516
+
+======================================================================
+🔍 Analyse : Département 55
+======================================================================
+   Max décès quotidiens : 3.7
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.25
+   SIR : RMS = 0.40
+         R0 = 1.12, Durée infection = 1.2 jours
+
+🏆 Gagnant : SR (ratio = 1.56×)
+
+📈 Calcul exposant critique γ...
+   γ = 0.409, t_c = 80 j, R² = 0.531
+
+======================================================================
+🔍 Analyse : Département 57
+======================================================================
+   Max décès quotidiens : 29.7
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.89
+   SIR : RMS = 1.66
+         R0 = 7.93, Durée infection = 21.1 jours
+
+🏆 Gagnant : SR (ratio = 1.88×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.347, t_c = 51 j, R² = 0.508
+
+======================================================================
+🔍 Analyse : Département 67
+======================================================================
+   Max décès quotidiens : 21.3
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.58
+   SIR : RMS = 1.01
+         R0 = 9.65, Durée infection = 25.1 jours
+
+🏆 Gagnant : SR (ratio = 1.76×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.053, t_c = 48 j, R² = 0.607
+
+======================================================================
+🔍 Analyse : Département 68
+======================================================================
+   Max décès quotidiens : 34.1
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.73
+   SIR : RMS = 1.47
+         R0 = 5.94, Durée infection = 13.8 jours
+
+🏆 Gagnant : SR (ratio = 2.03×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.177, t_c = 44 j, R² = 0.657
+
+======================================================================
+🔍 Analyse : Département 88
+======================================================================
+   Max décès quotidiens : 8.0
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.34
+   SIR : RMS = 0.73
+         R0 = 1.34, Durée infection = 2.7 jours
+
+🏆 Gagnant : SR (ratio = 2.14×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.897, t_c = 46 j, R² = 0.601
+
+======================================================================
+🔍 Analyse : Département 02
+======================================================================
+   Max décès quotidiens : 9.3
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.28
+   SIR : RMS = 1.01
+         R0 = 1.13, Durée infection = 1.2 jours
+
+🏆 Gagnant : SR (ratio = 3.55×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.149, t_c = 52 j, R² = 0.734
+
+======================================================================
+🔍 Analyse : Département 59
+======================================================================
+   Max décès quotidiens : 17.1
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.47
+   SIR : RMS = 2.05
+         R0 = 1.35, Durée infection = 2.9 jours
+
+🏆 Gagnant : SR (ratio = 4.35×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.475, t_c = 52 j, R² = 0.692
+
+======================================================================
+🔍 Analyse : Département 60
+======================================================================
+   Max décès quotidiens : 11.7
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.42
+   SIR : RMS = 1.13
+         R0 = 1.22, Durée infection = 2.0 jours
+
+🏆 Gagnant : SR (ratio = 2.70×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.773, t_c = 47 j, R² = 0.703
+
+======================================================================
+🔍 Analyse : Département 62
+======================================================================
+   Max décès quotidiens : 9.0
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.44
+   SIR : RMS = 0.96
+         R0 = 1.16, Durée infection = 1.3 jours
+
+🏆 Gagnant : SR (ratio = 2.16×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.620, t_c = 55 j, R² = 0.662
+
+======================================================================
+🔍 Analyse : Département 80
+======================================================================
+   Max décès quotidiens : 8.0
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.23
+   SIR : RMS = 0.78
+         R0 = 1.11, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 3.38×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.099, t_c = 52 j, R² = 0.535
+
+======================================================================
+🔍 Analyse : Département 75
+======================================================================
+   Max décès quotidiens : 51.1
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 1.05
+   SIR : RMS = 1.89
+         R0 = 5.55, Durée infection = 17.8 jours
+
+🏆 Gagnant : SR (ratio = 1.80×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.620, t_c = 49 j, R² = 0.670
+
+======================================================================
+🔍 Analyse : Département 77
+======================================================================
+   Max décès quotidiens : 20.3
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.45
+   SIR : RMS = 1.68
+         R0 = 1.31, Durée infection = 2.7 jours
+
+🏆 Gagnant : SR (ratio = 3.71×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.915, t_c = 53 j, R² = 0.625
+
+======================================================================
+🔍 Analyse : Département 78
+======================================================================
+   Max décès quotidiens : 16.6
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.36
+   SIR : RMS = 1.35
+         R0 = 1.21, Durée infection = 1.6 jours
+
+🏆 Gagnant : SR (ratio = 3.77×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.511, t_c = 50 j, R² = 0.633
+
+======================================================================
+🔍 Analyse : Département 91
+======================================================================
+   Max décès quotidiens : 15.1
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.37
+   SIR : RMS = 1.21
+         R0 = 1.22, Durée infection = 1.7 jours
+
+🏆 Gagnant : SR (ratio = 3.29×)
+
+📈 Calcul exposant critique γ...
+   γ = 3.083, t_c = 53 j, R² = 0.678
+
+======================================================================
+🔍 Analyse : Département 92
+======================================================================
+   Max décès quotidiens : 32.9
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.77
+   SIR : RMS = 2.09
+         R0 = 1.72, Durée infection = 5.1 jours
+
+🏆 Gagnant : SR (ratio = 2.72×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.468, t_c = 53 j, R² = 0.588
+
+======================================================================
+🔍 Analyse : Département 93
+======================================================================
+   Max décès quotidiens : 34.6
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.89
+   SIR : RMS = 1.67
+         R0 = 1.58, Durée infection = 3.7 jours
+
+🏆 Gagnant : SR (ratio = 1.88×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.154, t_c = 53 j, R² = 0.654
+
+======================================================================
+🔍 Analyse : Département 94
+======================================================================
+   Max décès quotidiens : 38.7
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.87
+   SIR : RMS = 2.95
+         R0 = 1.89, Durée infection = 5.8 jours
+
+🏆 Gagnant : SR (ratio = 3.40×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.791, t_c = 53 j, R² = 0.695
+
+======================================================================
+🔍 Analyse : Département 95
+======================================================================
+   Max décès quotidiens : 22.7
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.57
+   SIR : RMS = 1.83
+         R0 = 1.33, Durée infection = 2.7 jours
+
+🏆 Gagnant : SR (ratio = 3.23×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.121, t_c = 51 j, R² = 0.519
+
+======================================================================
+🔍 Analyse : Département 14
+======================================================================
+   Max décès quotidiens : 3.1
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.15
+   SIR : RMS = 0.48
+         R0 = 1.08, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 3.21×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.696, t_c = 55 j, R² = 0.803
+
+======================================================================
+🔍 Analyse : Département 27
+======================================================================
+   Max décès quotidiens : 3.1
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.16
+   SIR : RMS = 0.45
+         R0 = 1.09, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 2.80×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.635, t_c = 56 j, R² = 0.784
+
+======================================================================
+🔍 Analyse : Département 50
+======================================================================
+   Max décès quotidiens : 1.7
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.10
+   SIR : RMS = 0.28
+         R0 = 1.06, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 2.82×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.355, t_c = 49 j, R² = 0.642
+
+======================================================================
+🔍 Analyse : Département 61
+======================================================================
+   Max décès quotidiens : 1.4
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.09
+   SIR : RMS = 0.29
+         R0 = 1.04, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 3.30×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.212, t_c = 52 j, R² = 0.780
+
+======================================================================
+🔍 Analyse : Département 76
+======================================================================
+   Max décès quotidiens : 6.0
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.18
+   SIR : RMS = 0.58
+         R0 = 1.16, Durée infection = 1.3 jours
+
+🏆 Gagnant : SR (ratio = 3.18×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.388, t_c = 52 j, R² = 0.642
+
+======================================================================
+🔍 Analyse : Département 16
+======================================================================
+   Max décès quotidiens : 1.1
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.06
+   SIR : RMS = 0.24
+         R0 = 1.03, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 4.12×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.936, t_c = 46 j, R² = 0.650
+
+======================================================================
+🔍 Analyse : Département 17
+======================================================================
+   Max décès quotidiens : 1.6
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.09
+   SIR : RMS = 0.31
+         R0 = 1.07, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 3.29×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.851, t_c = 51 j, R² = 0.481
+
+======================================================================
+🔍 Analyse : Département 19
+======================================================================
+   Max décès quotidiens : 1.1
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.13
+   SIR : RMS = 0.22
+         R0 = 1.05, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 1.73×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.022, t_c = 61 j, R² = 0.534
+
+======================================================================
+🔍 Analyse : Département 23
+======================================================================
+   Max décès quotidiens : 0.6
+   ⚠️  Données insuffisantes (max < 1 décès/jour)
+
+======================================================================
+🔍 Analyse : Département 24
+======================================================================
+   Max décès quotidiens : 0.7
+   ⚠️  Données insuffisantes (max < 1 décès/jour)
+
+======================================================================
+🔍 Analyse : Département 33
+======================================================================
+   Max décès quotidiens : 4.1
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.19
+   SIR : RMS = 0.50
+         R0 = 1.20, Durée infection = 2.1 jours
+
+🏆 Gagnant : SR (ratio = 2.58×)
+
+📈 Calcul exposant critique γ...
+   γ = 3.209, t_c = 47 j, R² = 0.755
+
+======================================================================
+🔍 Analyse : Département 40
+======================================================================
+   Max décès quotidiens : 1.4
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.05
+   SIR : RMS = 0.25
+         R0 = 1.02, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 5.11×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.334, t_c = 72 j, R² = 0.412
+
+======================================================================
+🔍 Analyse : Département 47
+======================================================================
+   Max décès quotidiens : 0.6
+   ⚠️  Données insuffisantes (max < 1 décès/jour)
+
+======================================================================
+🔍 Analyse : Département 64
+======================================================================
+   Max décès quotidiens : 1.3
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.07
+   SIR : RMS = 0.26
+         R0 = 1.05, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 3.73×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.062, t_c = 48 j, R² = 0.723
+
+======================================================================
+🔍 Analyse : Département 79
+======================================================================
+   Max décès quotidiens : 1.0
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.07
+   SIR : RMS = 0.20
+         R0 = 1.03, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 2.77×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.613, t_c = 51 j, R² = 0.874
+
+======================================================================
+🔍 Analyse : Département 86
+======================================================================
+   Max décès quotidiens : 1.6
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.10
+   SIR : RMS = 0.25
+         R0 = 1.05, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 2.54×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.912, t_c = 47 j, R² = 0.690
+
+======================================================================
+🔍 Analyse : Département 87
+======================================================================
+   Max décès quotidiens : 1.3
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.07
+   SIR : RMS = 0.23
+         R0 = 1.04, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 3.29×)
+
+📈 Calcul exposant critique γ...
+   γ = 0.593, t_c = 81 j, R² = 0.721
+
+======================================================================
+🔍 Analyse : Département 11
+======================================================================
+   Max décès quotidiens : 2.3
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.12
+   SIR : RMS = 0.31
+         R0 = 1.09, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 2.67×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.553, t_c = 40 j, R² = 0.651
+
+======================================================================
+🔍 Analyse : Département 12
+======================================================================
+   Max décès quotidiens : 1.3
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.07
+   SIR : RMS = 0.24
+         R0 = 1.04, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 3.36×)
+
+📈 Calcul exposant critique γ...
+   γ = 0.275, t_c = 71 j, R² = 0.452
+
+======================================================================
+🔍 Analyse : Département 30
+======================================================================
+   Max décès quotidiens : 3.0
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.16
+   SIR : RMS = 0.29
+         R0 = 1.09, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 1.77×)
+
+📈 Calcul exposant critique γ...
+   γ = 0.417, t_c = 90 j, R² = 0.280
+
+======================================================================
+🔍 Analyse : Département 31
+======================================================================
+   Max décès quotidiens : 2.1
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.13
+   SIR : RMS = 0.25
+         R0 = 1.09, Durée infection = 1.1 jours
+
+🏆 Gagnant : SR (ratio = 1.92×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.527, t_c = 55 j, R² = 0.679
+
+======================================================================
+🔍 Analyse : Département 32
+======================================================================
+   Max décès quotidiens : 1.0
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.05
+   SIR : RMS = 0.22
+         R0 = 1.04, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 4.16×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.858, t_c = 52 j, R² = 0.641
+
+======================================================================
+🔍 Analyse : Département 34
+======================================================================
+   Max décès quotidiens : 4.3
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.19
+   SIR : RMS = 0.37
+         R0 = 1.15, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 1.98×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.833, t_c = 49 j, R² = 0.611
+
+======================================================================
+🔍 Analyse : Département 46
+======================================================================
+   Max décès quotidiens : 1.6
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.11
+   SIR : RMS = 0.33
+         R0 = 1.06, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 2.99×)
+
+📈 Calcul exposant critique γ...
+   γ = 0.416, t_c = 94 j, R² = 0.699
+
+======================================================================
+🔍 Analyse : Département 65
+======================================================================
+   Max décès quotidiens : 1.0
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.08
+   SIR : RMS = 0.22
+         R0 = 1.05, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 2.69×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.532, t_c = 60 j, R² = 0.577
+
+======================================================================
+🔍 Analyse : Département 66
+======================================================================
+   Max décès quotidiens : 1.1
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.06
+   SIR : RMS = 0.22
+         R0 = 1.06, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 3.79×)
+
+📈 Calcul exposant critique γ...
+   γ = 0.787, t_c = 45 j, R² = 0.450
+
+======================================================================
+🔍 Analyse : Département 81
+======================================================================
+   Max décès quotidiens : 1.1
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.06
+   SIR : RMS = 0.22
+         R0 = 1.04, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 3.95×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.516, t_c = 59 j, R² = 0.904
+
+======================================================================
+🔍 Analyse : Département 44
+======================================================================
+   Max décès quotidiens : 4.4
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.23
+   SIR : RMS = 0.55
+         R0 = 1.12, Durée infection = 1.1 jours
+
+🏆 Gagnant : SR (ratio = 2.42×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.693, t_c = 47 j, R² = 0.660
+
+======================================================================
+🔍 Analyse : Département 49
+======================================================================
+   Max décès quotidiens : 4.1
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.23
+   SIR : RMS = 0.51
+         R0 = 1.10, Durée infection = 1.2 jours
+
+🏆 Gagnant : SR (ratio = 2.19×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.738, t_c = 51 j, R² = 0.639
+
+======================================================================
+🔍 Analyse : Département 53
+======================================================================
+   Max décès quotidiens : 1.6
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.10
+   SIR : RMS = 0.28
+         R0 = 1.04, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 2.82×)
+
+📈 Calcul exposant critique γ...
+   γ = 0.119, t_c = 73 j, R² = 0.048
+
+======================================================================
+🔍 Analyse : Département 72
+======================================================================
+   Max décès quotidiens : 2.3
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.13
+   SIR : RMS = 0.33
+         R0 = 1.07, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 2.50×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.654, t_c = 49 j, R² = 0.794
+
+======================================================================
+🔍 Analyse : Département 85
+======================================================================
+   Max décès quotidiens : 1.7
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.10
+   SIR : RMS = 0.34
+         R0 = 1.04, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 3.45×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.795, t_c = 52 j, R² = 0.659
+
+======================================================================
+🔍 Analyse : Département 05
+======================================================================
+   Max décès quotidiens : 0.6
+   ⚠️  Données insuffisantes (max < 1 décès/jour)
+
+======================================================================
+🔍 Analyse : Département 06
+======================================================================
+   Max décès quotidiens : 4.7
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.22
+   SIR : RMS = 0.44
+         R0 = 1.13, Durée infection = 1.4 jours
+
+🏆 Gagnant : SR (ratio = 2.00×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.603, t_c = 52 j, R² = 0.646
+
+======================================================================
+🔍 Analyse : Département 13
+======================================================================
+   Max décès quotidiens : 16.9
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.49
+   SIR : RMS = 1.53
+         R0 = 1.63, Durée infection = 5.4 jours
+
+🏆 Gagnant : SR (ratio = 3.13×)
+
+📈 Calcul exposant critique γ...
+   γ = 0.353, t_c = 85 j, R² = 0.342
+
+======================================================================
+🔍 Analyse : Département 83
+======================================================================
+   Max décès quotidiens : 4.7
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.17
+   SIR : RMS = 0.36
+         R0 = 1.10, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 2.05×)
+
+📈 Calcul exposant critique γ...
+   γ = 0.167, t_c = 80 j, R² = 0.097
+
+======================================================================
+🔍 Analyse : Département 84
+======================================================================
+   Max décès quotidiens : 1.7
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.09
+   SIR : RMS = 0.32
+         R0 = 1.03, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 3.44×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.718, t_c = 50 j, R² = 0.886
+
+📍 NIVEAU 2 : RÉGIONS
+--------------------------------------------------------------------------------
+
+======================================================================
+🔍 Analyse : Auvergne-Rhône-Alpes
+======================================================================
+   Max décès quotidiens : 44.4
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.94
+   SIR : RMS = 4.22
+         R0 = 1.13, Durée infection = 1.3 jours
+
+🏆 Gagnant : SR (ratio = 4.50×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.974, t_c = 50 j, R² = 0.657
+
+======================================================================
+🔍 Analyse : Bourgogne-Franche-Comté
+======================================================================
+   Max décès quotidiens : 26.6
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 1.13
+   SIR : RMS = 2.22
+         R0 = 1.25, Durée infection = 2.4 jours
+
+🏆 Gagnant : SR (ratio = 1.97×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.779, t_c = 48 j, R² = 0.543
+
+======================================================================
+🔍 Analyse : Bretagne
+======================================================================
+   Max décès quotidiens : 8.4
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.25
+   SIR : RMS = 1.45
+         R0 = 1.06, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 5.80×)
+
+📈 Calcul exposant critique γ...
+   γ = 0.161, t_c = 76 j, R² = 0.094
+
+======================================================================
+🔍 Analyse : Centre-Val de Loire
+======================================================================
+   Max décès quotidiens : 13.0
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.51
+   SIR : RMS = 1.29
+         R0 = 1.12, Durée infection = 1.2 jours
+
+🏆 Gagnant : SR (ratio = 2.53×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.984, t_c = 51 j, R² = 0.606
+
+======================================================================
+🔍 Analyse : Grand Est
+======================================================================
+   Max décès quotidiens : 103.7
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 2.08
+   SIR : RMS = 9.59
+         R0 = 1.57, Durée infection = 4.2 jours
+
+🏆 Gagnant : SR (ratio = 4.61×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.111, t_c = 47 j, R² = 0.583
+
+======================================================================
+🔍 Analyse : Hauts-de-France
+======================================================================
+   Max décès quotidiens : 51.3
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 1.04
+   SIR : RMS = 4.62
+         R0 = 1.18, Durée infection = 1.7 jours
+
+🏆 Gagnant : SR (ratio = 4.43×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.765, t_c = 52 j, R² = 0.663
+
+======================================================================
+🔍 Analyse : Île-de-France
+======================================================================
+   Max décès quotidiens : 217.7
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 3.11
+   SIR : RMS = 14.06
+         R0 = 1.52, Durée infection = 3.9 jours
+
+🏆 Gagnant : SR (ratio = 4.51×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.450, t_c = 52 j, R² = 0.626
+
+======================================================================
+🔍 Analyse : Normandie
+======================================================================
+   Max décès quotidiens : 14.3
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.31
+   SIR : RMS = 1.66
+         R0 = 1.09, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 5.39×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.558, t_c = 54 j, R² = 0.674
+
+======================================================================
+🔍 Analyse : Nouvelle-Aquitaine
+======================================================================
+   Max décès quotidiens : 12.1
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.36
+   SIR : RMS = 2.14
+         R0 = 1.05, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 5.87×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.952, t_c = 49 j, R² = 0.581
+
+======================================================================
+🔍 Analyse : Occitanie
+======================================================================
+   Max décès quotidiens : 13.3
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.53
+   SIR : RMS = 1.92
+         R0 = 1.06, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 3.62×)
+
+📈 Calcul exposant critique γ...
+   γ = 1.263, t_c = 49 j, R² = 0.561
+
+======================================================================
+🔍 Analyse : Pays de la Loire
+======================================================================
+   Max décès quotidiens : 11.4
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.38
+   SIR : RMS = 1.50
+         R0 = 1.08, Durée infection = 1.0 jours
+
+🏆 Gagnant : SR (ratio = 3.98×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.662, t_c = 49 j, R² = 0.622
+
+======================================================================
+🔍 Analyse : Provence-Alpes-Côte d'Azur
+======================================================================
+   Max décès quotidiens : 24.9
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 0.53
+   SIR : RMS = 2.10
+         R0 = 1.11, Durée infection = 1.1 jours
+
+🏆 Gagnant : SR (ratio = 3.94×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.779, t_c = 52 j, R² = 0.646
+
+📍 NIVEAU 3 : NATIONAL
+--------------------------------------------------------------------------------
+
+======================================================================
+🔍 Analyse : France
+======================================================================
+   Max décès quotidiens : 530.7
+
+📊 Ajustement des modèles...
+   SR 4 modes : RMS = 7.42
+   SIR : RMS = 43.09
+         R0 = 1.17, Durée infection = 1.6 jours
+
+🏆 Gagnant : SR (ratio = 5.81×)
+
+📈 Calcul exposant critique γ...
+   γ = 2.115, t_c = 50 j, R² = 0.615
+
+================================================================================
+✅ ANALYSE TERMINÉE
+================================================================================
+
+Résultats :
+   Départements analysés : 85
+   Régions analysées : 12
+   National : ✅
+
+✅ Résultats départements sauvegardés : results/france_departements_consolidee.csv
+✅ Résultats régions sauvegardés : results/france_regions_consolidee.csv
+✅ Résultats national sauvegardés : results/france_national_consolidee.csv

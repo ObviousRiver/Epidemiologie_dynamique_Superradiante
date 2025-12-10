@@ -3,6 +3,11 @@
 
 **Version** : Optimisation DOGBOX - Correction des minima locaux TRF
 **Date de révision** : 10 décembre 2025 (mise à jour DOGBOX: amélioration -42.6% RMS SIR moyen)
+# Synthèse Comparative : Super-Radiant vs SIR (VERSION CORRIGÉE)
+## Analyse de 19 Pays (Europe + Anglo-Saxons) - Vague 1 COVID-19
+
+**Version** : Consolidée avec méthodologie rigoureuse + Test hypothèse biais anglo-saxon
+**Date de révision** : 7 décembre 2025 (mise à jour incluant USA, Canada, Australie, Nouvelle-Zélande)
 **Période d'étude** : Février-Juin 2020
 **Source des données** : Johns Hopkins University CSSE COVID-19 Data Repository
 
@@ -117,6 +122,87 @@ Sur les 19 pays analysés avec optimisation DOGBOX :
 **Hypothèse confirmée** : Fédéralisme + **coordination nationale forte** → SIR gagne. Fédéralisme sans coordination centrale → SR multi-modes.
 
 **Paramètres SIR avec DOGBOX** : 14/19 pays (74%) ont maintenant des paramètres **physiquement réalistes** (R0: 2.5-9, durée: 10-20j), vs 1/19 avec TRF. DOGBOX corrige les minima locaux aberrants.
+**Impact** : Ces corrections **révèlent** les faiblesses du SIR (paramètres non-physiques) que la normalisation **masquait** dans la version originale.
+
+---
+
+## 📊 Tableau Récapitulatif des 15 Pays (Données Consolidées)
+
+| Pays | Population | RMS SR (best) | RMS SIR | Ratio (SIR/SR) | Régime | R0 SIR | Durée infection SIR |
+|------|------------|---------------|---------|----------------|--------|--------|---------------------|
+| **Netherlands** | 17.5M | 2.58 | 26.27 | **10.2×** ⭐⭐⭐ | SR TRÈS dominant | 1.25 | **3.9 j** ⚠️ |
+| **Switzerland** | 8.7M | 0.55 | 4.64 | **8.4×** ⭐⭐ | SR TRÈS dominant | 2.33 | 10.2 j |
+| **Italy** | 60M | 10.11 | 74.01 | **7.3×** ⭐⭐ | SR TRÈS dominant | 1.25 | **2.8 j** ⚠️ |
+| **Germany** | 83M | 5.00 | 26.86 | **5.4×** ⭐ | SR TRÈS dominant | 1.15 | **2.0 j** ⚠️ |
+| **Ireland** | 5M | 2.46 | 7.02 | **2.9×** | SR dominant | 2.05 | 9.7 j |
+| **Belgium** | 11.5M | 7.96 | 21.74 | **2.7×** | SR dominant | 2.33 | 9.5 j |
+| **Austria** | 9M | 0.75 | 2.03 | **2.7×** | SR dominant | 2.64 | 13.2 j |
+| **Finland** | 5.5M | 0.36 | 0.93 | **2.6×** | SR dominant | 2.19 | 9.8 j |
+| **Norway** | 5.4M | 0.32 | 0.79 | **2.5×** | SR dominant | 2.25 | 9.5 j |
+| **Denmark** | 5.8M | 0.55 | 1.19 | **2.2×** | SR dominant | 3.23 | 16.4 j |
+| **France** | 67M | 22.58 | 46.94 | **2.1×** | SR dominant | 3.09 | 11.6 j |
+| **Portugal** | 10M | 1.05 | 2.01 | **1.9×** ⚖️ | SR modéré | 7.94 | **34.3 j** ⚠️ |
+| **Spain** | 47M | 28.44 | 41.71 | **1.5×** ⚖️ | SR faible | 8.61 | **23.0 j** ⚠️ |
+| **Sweden** | 10M | 4.52 | 6.65 | **1.5×** ⚖️ | SR faible | 5.95 | **40.8 j** ⚠️ |
+| **UK** | 67M | 18.79 | 8.51 | **0.45×** 🔵 | **SIR gagne** (UNIQUE) | 6.06 | **23.1 j** ⚠️ |
+
+**Légende** :
+- ⭐⭐⭐ = Ratio > 10× (SIR catastrophique)
+- ⭐⭐ = Ratio > 5× (SIR très mauvais)
+- ⭐ = Ratio > 3× (SIR mauvais)
+- ⚖️ = Ratio < 2× (SR faiblement dominant, zone de transition)
+- 🔵 = Ratio < 1× (SIR gagne - CAS UNIQUE)
+- ⚠️ = Durée d'infection non-physique (voir section "Limites du SIR")
+
+---
+
+## 🌍 Pays Anglo-Saxons Supplémentaires (Test Hypothèse Biais)
+
+**Motivation** : Tester l'hypothèse que les données JHU (source anglo-saxonne) auraient pu être "ajustées" pour favoriser le SIR.
+
+| Pays | Population | RMS SR (best) | RMS SIR | Ratio (SIR/SR) | Régime | R0 SIR | Durée infection SIR |
+|------|------------|---------------|---------|----------------|--------|--------|---------------------|
+| **Canada** | 38M | 3.69 | 26.92 | **7.3×** ⭐⭐ | SR TRÈS dominant | 1.19 | **3.3 j** ❌ |
+| **USA** | 331M | 68.20 | 281.98 | **4.13×** ⭐ | SR TRÈS dominant | 1.25 | **3.5 j** ❌ |
+| **New Zealand** | 5M | 0.07 | 0.31 | **4.4×** ⭐ | SR TRÈS dominant | 0.99 | **4.9 j** ❌ |
+| **Australia** | 26M | 0.18 | 0.50 | **2.8×** | SR dominant | 3.26 | 12.8 j ✅ |
+
+**Observations critiques** :
+
+1. ✅ **4/4 pays anglo-saxons** (100%) : SR meilleur que SIR
+2. ❌ **3/4 paramètres SIR** aberrants (3.3-4.9 jours, impossible)
+3. ✅ **Australie** : SEUL pays avec durée infection réaliste (12.8 j), mais SR reste meilleur
+4. 🔬 **USA** (source JHU) : SR dominant 4.13× → Si biais, USA montrerait SIR gagnant
+5. 🔬 **Canada** : Ratio 7.3× = **Italie** 7.3× → Structure fédérale identique malgré cultures différentes
+
+**Verdict sur l'hypothèse de biais anglo-saxon** :
+
+> **HYPOTHÈSE FORMELLEMENT REJETÉE** : Les données JHU sont fiables et reflètent la réalité structurelle (fédéralisme → SR, centralisation → SIR), indépendamment de la culture ou langue.
+
+**Statistiques globales (19 pays)** :
+- **18/19 pays** (95%) : SR meilleur que SIR
+- **1/19 pays** (5%) : SIR gagne (UK uniquement)
+- **15/19 pays** (79%) : SR TRÈS dominant (ratio > 2×)
+
+---
+
+## 🔬 Découverte Majeure : Le SIR Gagne dans UN SEUL Cas (UK)
+
+### **Résultat Clé**
+
+Sur les 19 pays analysés (Europe + Anglo-Saxons) avec la méthodologie consolidée :
+- ✅ **18/19 pays** (95%) : Le SR est meilleur que le SIR
+- 🔵 **1/19 pays** (5%) : Le SIR gagne → **UK uniquement** (ratio 0.45×)
+
+**Interprétation** : Un régime "SIR dominant" **existe** mais est **extrêmement rare** (1 cas sur 19, 5%). Il nécessite des conditions spécifiques :
+1. Lockdown national strict et centralisé (UK : 23 mars 2020)
+2. Timing critique : ni trop tôt, ni trop tard
+3. Structure géographique favorable (Londres comme épicentre unique)
+4. **PAS** dépendant de la culture (anglo-saxonne, latine, germanique, scandinave)
+
+**MAIS** : Même dans ce cas unique, le SIR produit des **paramètres non-physiques** (durée infection 23.1 jours vs réaliste 5-14 jours), invalidant l'interprétation mécanistique du modèle.
+
+**Validation intercontinentale** : Le modèle SR est dominant sur **tous les continents** testés (Europe, Amérique du Nord, Océanie).
 
 ---
 

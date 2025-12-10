@@ -1,0 +1,134 @@
+================================================================================
+🔬 GÉNÉRATION ANALYSES ENRICHIES FRANCE
+================================================================================
+📥 Chargement données SPF depuis fichier local: data/covid-hospit-incid-2023-03-31-18h01.csv
+✅ Données SPF chargées : 113,016 lignes
+📊 Vague 1 (France métropolitaine) : 9,984 lignes
+   Départements uniques : 96
+   Période : 2020-03-19 00:00:00 → 2020-06-30 00:00:00
+
+📍 DÉPARTEMENTS (seuil > 15.0 décès/jour)
+--------------------------------------------------------------------------------
+   Sélectionnés : 15 départements
+   (dont 10 prioritaires)
+
+⭐ 🔍 Département 69 (17.4 décès/j max)
+      Recalcul fits...
+   ✅ Visualisation enrichie sauvegardée : results/france_enriched/dept_69_enriched.png
+      ✅ Ratio SR/SIR : 1.31×, γ = 1.595
+
+   🔍 Département 57 (29.7 décès/j max)
+      Recalcul fits...
+   ✅ Visualisation enrichie sauvegardée : results/france_enriched/dept_57_enriched.png
+      ✅ Ratio SR/SIR : 1.88×, γ = 2.347
+
+⭐ 🔍 Département 67 (21.3 décès/j max)
+      Recalcul fits...
+   ✅ Visualisation enrichie sauvegardée : results/france_enriched/dept_67_enriched.png
+      ✅ Ratio SR/SIR : 1.76×, γ = 2.053
+
+⭐ 🔍 Département 68 (34.1 décès/j max)
+      Recalcul fits...
+   ✅ Visualisation enrichie sauvegardée : results/france_enriched/dept_68_enriched.png
+      ✅ Ratio SR/SIR : 2.03×, γ = 2.177
+
+⭐ 🔍 Département 59 (17.1 décès/j max)
+      Recalcul fits...
+   ✅ Visualisation enrichie sauvegardée : results/france_enriched/dept_59_enriched.png
+      ✅ Ratio SR/SIR : 4.35×, γ = 2.475
+
+⭐ 🔍 Département 75 (51.1 décès/j max)
+      Recalcul fits...
+   ✅ Visualisation enrichie sauvegardée : results/france_enriched/dept_75_enriched.png
+      ✅ Ratio SR/SIR : 1.80×, γ = 2.620
+
+   🔍 Département 77 (20.3 décès/j max)
+      Recalcul fits...
+   ✅ Visualisation enrichie sauvegardée : results/france_enriched/dept_77_enriched.png
+      ✅ Ratio SR/SIR : 3.71×, γ = 2.915
+
+   🔍 Département 78 (16.6 décès/j max)
+      Recalcul fits...
+   ✅ Visualisation enrichie sauvegardée : results/france_enriched/dept_78_enriched.png
+      ✅ Ratio SR/SIR : 3.77×, γ = 2.511
+
+   🔍 Département 91 (15.1 décès/j max)
+      Recalcul fits...
+   ✅ Visualisation enrichie sauvegardée : results/france_enriched/dept_91_enriched.png
+      ✅ Ratio SR/SIR : 3.29×, γ = 3.083
+
+⭐ 🔍 Département 92 (32.9 décès/j max)
+      Recalcul fits...
+   ✅ Visualisation enrichie sauvegardée : results/france_enriched/dept_92_enriched.png
+      ✅ Ratio SR/SIR : 2.72×, γ = 2.468
+
+⭐ 🔍 Département 93 (34.6 décès/j max)
+      Recalcul fits...
+   ✅ Visualisation enrichie sauvegardée : results/france_enriched/dept_93_enriched.png
+      ✅ Ratio SR/SIR : 1.88×, γ = 2.154
+
+⭐ 🔍 Département 94 (38.7 décès/j max)
+      Recalcul fits...
+   ✅ Visualisation enrichie sauvegardée : results/france_enriched/dept_94_enriched.png
+      ✅ Ratio SR/SIR : 3.40×, γ = 2.791
+
+   🔍 Département 95 (22.7 décès/j max)
+      Recalcul fits...
+   ✅ Visualisation enrichie sauvegardée : results/france_enriched/dept_95_enriched.png
+      ✅ Ratio SR/SIR : 3.23×, γ = 2.121
+
+⭐ 🔍 Département 33 (4.1 décès/j max)
+      Recalcul fits...
+   ✅ Visualisation enrichie sauvegardée : results/france_enriched/dept_33_enriched.png
+      ✅ Ratio SR/SIR : 2.58×, γ = 3.209
+
+⭐ 🔍 Département 13 (16.9 décès/j max)
+      Recalcul fits...
+   ✅ Visualisation enrichie sauvegardée : results/france_enriched/dept_13_enriched.png
+      ✅ Ratio SR/SIR : 3.13×, γ = 0.353
+
+
+📍 RÉGIONS PRIORITAIRES (5)
+--------------------------------------------------------------------------------
+
+⭐ 🔍 Auvergne-Rhône-Alpes (44.4 décès/j max)
+      Recalcul fits...
+   ✅ Visualisation enrichie sauvegardée : results/france_enriched/region_Auvergne_Rhône_Alpes_enriched.png
+      ✅ Ratio SR/SIR : 4.50×, γ = 1.974
+
+⭐ 🔍 Grand Est (103.7 décès/j max)
+      Recalcul fits...
+   ✅ Visualisation enrichie sauvegardée : results/france_enriched/region_Grand_Est_enriched.png
+      ✅ Ratio SR/SIR : 4.61×, γ = 2.111
+
+⭐ 🔍 Hauts-de-France (51.3 décès/j max)
+      Recalcul fits...
+   ✅ Visualisation enrichie sauvegardée : results/france_enriched/region_Hauts_de_France_enriched.png
+      ✅ Ratio SR/SIR : 4.43×, γ = 1.765
+
+⭐ 🔍 Île-de-France (217.7 décès/j max)
+      Recalcul fits...
+   ✅ Visualisation enrichie sauvegardée : results/france_enriched/region_Île_de_France_enriched.png
+      ✅ Ratio SR/SIR : 4.51×, γ = 2.450
+
+⭐ 🔍 Provence-Alpes-Côte d'Azur (24.9 décès/j max)
+      Recalcul fits...
+   ✅ Visualisation enrichie sauvegardée : results/france_enriched/region_Provence_Alpes_Côte_d_Azur_enriched.png
+      ✅ Ratio SR/SIR : 3.94×, γ = 2.779
+
+
+📍 NATIONAL (France)
+--------------------------------------------------------------------------------
+   🇫🇷 France (max 530.7 décès/j)
+      Recalcul fits...
+   ✅ Visualisation enrichie sauvegardée : results/france_enriched/france_national_enriched.png
+      ✅ Ratio SR/SIR : 5.81×, γ = 2.115
+
+================================================================================
+✅ GÉNÉRATION ANALYSES ENRICHIES TERMINÉE
+================================================================================
+
+📂 Résultats : results/france_enriched/
+   - Départements : 15 visualisations
+   - Régions : 5 visualisations
+   - National : 1 visualisation

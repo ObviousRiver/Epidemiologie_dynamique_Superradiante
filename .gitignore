@@ -34,6 +34,10 @@ covid_data/
 *.csv
 *.zip
 
+# Exception: allow data files in data/ directory (historical datasets for reproducibility)
+!data/*.csv
+!data/README.md
+
 # Figures and reports (but allow reports/ directory)
 *.png
 *.pdf
