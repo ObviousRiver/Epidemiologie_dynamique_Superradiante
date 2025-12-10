@@ -432,3 +432,64 @@ class SIRModel:
             'R': sol[:, 2],
             'deaths': self._deaths_from_I(sol[:, 1], gamma) * scale
         }
+
+    def get_fit_quality(self, t_data, y_data):
+        """
+        Calcule les métriques de qualité du fit.
+
+        Retourne plusieurs indicateurs complémentaires :
+        - RMS absolu : Erreur quadratique moyenne (même unité que les données)
+        - NRMSE : RMS normalisé par le range des données (sans unité)
+        - NRMSE% : NRMSE exprimé en pourcentage
+        - R² : Coefficient de détermination (0 = modèle nul, 1 = fit parfait)
+
+        Le NRMSE est particulièrement utile pour comparer la qualité du fit
+        entre différents pays ayant des échelles de mortalité différentes.
+
+        Args:
+            t_data (array): Données temporelles (en jours)
+            y_data (array): Décès quotidiens observés
+
+        Returns:
+            dict: {
+                'rms': RMS absolu,
+                'nrmse': NRMSE (0-1),
+                'nrmse_percent': NRMSE en pourcentage (0-100),
+                'r2': Coefficient de détermination (0-1)
+            }
+
+        Raises:
+            ValueError: Si le modèle n'a pas été ajusté
+        """
+        if self.params is None:
+            raise ValueError("Le modèle doit d'abord être ajusté avec fit()")
+
+        # Prédiction du modèle
+        y_fit = self.predict(t_data)
+
+        # 1. RMS absolu (erreur quadratique moyenne)
+        rms = np.sqrt(np.mean((y_data - y_fit)**2))
+
+        # 2. NRMSE (RMS normalisé par le range des données)
+        data_range = y_data.max() - y_data.min()
+        if data_range > 0:
+            nrmse = rms / data_range
+            nrmse_percent = nrmse * 100
+        else:
+            nrmse = 0.0
+            nrmse_percent = 0.0
+
+        # 3. R² (coefficient de détermination)
+        # R² = 1 - SS_res / SS_tot
+        # où SS_res = somme des carrés des résidus
+        #     SS_tot = variance totale des données
+        ss_res = np.sum((y_data - y_fit)**2)
+        ss_tot = np.sum((y_data - np.mean(y_data))**2)
+        r2 = 1 - (ss_res / ss_tot) if ss_tot > 0 else 0.0
+
+        return {
+            'rms': rms,
+            'nrmse': nrmse,
+            'nrmse_percent': nrmse_percent,
+            'r2': r2
+        }
