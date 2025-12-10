@@ -24,33 +24,47 @@ Centralisation/Précoce     →    Régime Classique SIR
 
 ---
 
-## 📊 Résultats de l'Étude Comparative (10 Pays)
+## 📊 Résultats de l'Étude Comparative (19 Pays)
 
 ### Champions par Catégorie
 
 | 🏆 Catégorie | Pays | Performance |
 |-------------|------|-------------|
 | **Meilleur RMS Super-Radiant** | 🇨🇭 Suisse | **1.55%** |
-| **Meilleure amélioration SR** | 🇮🇹 Italie | **27.92x** vs SIR |
-| **Meilleur RMS SIR** | 🇬🇧 UK | **0.94%** |
-| **Point de transition parfait** | 🇳🇴 Norvège | **1.00x** (égalité) |
+| **Meilleure amélioration SR** | 🇦🇺 Australia | **2.71x** vs SIR |
+| **Meilleur RMS SIR** | 🇺🇸 USA | **52.44** |
+| **Point de transition parfait** | 🇩🇪 Allemagne | **1.16x** (quasi-égalité) |
 
 ### Tableau Récapitulatif
 
-| Pays | Population | Politique COVID | Gagnant | Amélioration | RMS |
-|------|------------|-----------------|---------|--------------|-----|
-| 🇮🇹 **Italie** | 60M | Régional/Tardif | **SR** | **27.92x** ⭐⭐⭐ | 1.59% |
-| 🇨🇭 **Suisse** | 8.7M | Fédéral (26 cantons) | **SR** | 1.56x | **1.55%** ⭐ |
-| 🇫🇷 **France** | 67M | Régional/Tardif | **SR** | **14.88x** ⭐⭐⭐ | 2.46% |
-| 🇧🇪 Belgique | 11.5M | 3 régions | **SR** | 1.68x | 2.55% |
-| 🇸🇪 Suède | 10M | Volontaire | **SR** | 1.46x | 6.32% |
-| 🇦🇹 Autriche | 9M | 9 Länder autonomie | **SR** | 1.07x ⚖️ | 4.97% |
-| 🇳🇴 **Norvège** | 5.4M | Strict (12 mars) | **SIR** | **1.00x** ⚖️ | 5.77% |
-| 🇩🇪 Allemagne | 83M | Coordiné national | **SIR** | 1.26x | 2.77% |
-| 🇪🇸 Espagne | 47M | Strict (14 mars) | **SIR** | 0.84x | 4.89% |
-| 🇬🇧 **UK** | 67M | National (23 mars) | **SIR** | 3.63x | **0.94%** ⭐ |
+| Pays | Population | Politique COVID | Gagnant | Ratio SIR/SR | RMS SR |
+|------|------------|-----------------|---------|--------------|--------|
+| 🇦🇺 **Australia** | 26M | État-fédéral coordonné | **SR** | **2.71x** ⭐ | 0.18 |
+| 🇳🇱 **Netherlands** | 17.5M | Régional/Tardif | **SR** | **2.52x** ⭐ | 2.58 |
+| 🇨🇭 **Suisse** | 8.7M | Fédéral (26 cantons) | **SR** | **2.46x** ⭐ | 0.55 |
+| 🇮🇹 **Italie** | 60M | Régional/Tardif | **SR** | **2.03x** | 10.11 |
+| 🇮🇪 Ireland | 5M | National progressif | **SR** | 1.93x | 2.46 |
+| 🇵🇹 Portugal | 10M | État d'urgence | **SR** | 1.91x | 1.05 |
+| 🇫🇮 Finland | 5.5M | Strict précoce | **SR** | 1.74x | 0.36 |
+| 🇨🇦 Canada | 38M | Fédéral-provincial | **SR** | 1.72x | 3.69 |
+| 🇫🇷 **France** | 67M | Régional/Tardif | **SR** | **1.39x** | 22.54 |
+| 🇸🇪 Suède | 10M | Volontaire | **SR** | 1.39x | 4.51 |
+| 🇪🇸 Espagne | 47M | Strict (14 mars) | **SR** | 1.47x | 28.38 |
+| 🇦🇹 Autriche | 9M | 9 Länder autonomie | **SR** | 1.48x | 0.74 |
+| 🇩🇰 Denmark | 5.8M | Strict précoce | **SR** | 1.48x | 0.55 |
+| 🇳🇴 Norvège | 5.4M | Strict (12 mars) | **SR** | 1.46x | 0.32 |
+| 🇧🇪 Belgique | 11.5M | 3 régions | **SR** | 1.24x | 7.97 |
+| 🇳🇿 New Zealand | 5M | Élimination stricte | **SR** | 1.17x | 0.07 |
+| 🇩🇪 **Allemagne** | 83M | Coordiné national | **SR** | **1.16x** ⚖️ | 5.02 |
+| 🇺🇸 **USA** | 331M | Fédéral + National | **SIR** | **0.77x** 🔵 | 68.20 |
+| 🇬🇧 **UK** | 67M | National (23 mars) | **SIR** | **0.45x** 🔵 | 18.91 |
 
-**Légende** : ⭐ Performance exceptionnelle | ⚖️ Point de transition
+**Légende** :
+- ⭐ Performance SR exceptionnelle (ratio > 2.4×)
+- ⚖️ Point de transition (ratio ≈ 1.0-1.2×, quasi-égalité)
+- 🔵 **SIR gagne** (ratio < 1.0×, modèle SIR meilleur que SR)
+
+**Note méthodologique** : Résultats obtenus avec optimisation DOGBOX (Powell's dogleg) pour le modèle SIR, corrigeant les problèmes de convergence vers des minima locaux non-physiques de la méthode TRF précédente. Amélioration moyenne du fit SIR : **-42.6%** en RMS.
 
 ---
 
@@ -58,31 +72,48 @@ Centralisation/Précoce     →    Régime Classique SIR
 
 ### 1. La Culture N'a AUCUN Impact ❌
 
-**Preuve par 2 paires de contrôle culturel :**
+**Preuve par paires de contrôle culturel :**
 
 #### Famille Germanique 🇩🇪 🇦🇹
-- **Allemagne** (coordination nationale) → SIR gagne 1.26x
-- **Autriche** (autonomie Länder) → SR gagne 1.07x
-- **Conclusion** : Même culture, résultats **opposés**
+- **Allemagne** (coordination nationale) → SR faible 1.16x (transition)
+- **Autriche** (autonomie Länder) → SR modéré 1.48x
+- **Conclusion** : Même culture, intensités SR **différentes**
 
 #### Famille Scandinave 🇳🇴 🇸🇪
-- **Norvège** (confinement strict 12 mars) → SIR gagne 1.00x
-- **Suède** (mesures volontaires) → SR gagne 1.46x
-- **Conclusion** : Même culture, résultats **opposés**
+- **Norvège** (confinement strict 12 mars) → SR modéré 1.46x
+- **Suède** (mesures volontaires) → SR modéré 1.39x
+- **Conclusion** : Même culture, résultats **similaires** (SR modéré)
+
+#### Famille Anglophone 🇺🇸 🇬🇧 🇦🇺
+- **USA** (fédéral + coordination nationale) → **SIR gagne 0.77x** 🔵
+- **UK** (national centralisé) → **SIR gagne 0.45x** 🔵
+- **Australia** (état-fédéral coordonné) → SR fort 2.71x
+- **Conclusion** : Même langue/culture, résultats **opposés** selon politique
 
 ### 2. Facteurs Invalidés ❌
 
 | Facteur | Contre-Exemple |
 |---------|----------------|
-| **Taille** | Suisse (8.7M) → SR ; UK (67M) → SIR |
-| **Culture** | Allemagne ≠ Autriche ; Norvège ≠ Suède |
-| **Structure constitutionnelle** | Allemagne (fédérale) → SIR ; Suisse (fédérale) → SR |
+| **Taille population** | USA (331M) → SIR ; Netherlands (17.5M) → SR |
+| **Culture** | USA ≠ UK ≠ Australia (tous anglophones, résultats opposés) |
+| **Structure constitutionnelle** | Allemagne (fédérale) → SR faible ; Suisse (fédérale) → SR fort |
+| **PIB/Richesse** | Suisse (riche) → SR ; Norvège (riche) → SR |
 
-### 3. Seul Facteur Déterminant ✅
+### 3. Pattern Émergent : Fédéralisme + Coordination ✅
 
-**Politique de santé publique** :
-- Décentralisée/Tardive → Super-Radiant multi-modes
-- Centralisée/Précoce → SIR homogène
+**Découverte majeure avec DOGBOX** : USA rejoint UK comme 2ème pays SIR-gagnant
+
+| Pays | Structure | Coordination | Résultat |
+|------|-----------|--------------|----------|
+| 🇺🇸 **USA** | Fédérale (50 états) | Nationale (CDC, Federal Guidelines) | **SIR 0.77x** 🔵 |
+| 🇬🇧 **UK** | Unitaire dévolu | Nationale centralisée (NHS) | **SIR 0.45x** 🔵 |
+| 🇨🇭 Suisse | Fédérale (26 cantons) | Cantonale autonome | SR 2.46x |
+| 🇩🇪 Allemagne | Fédérale (16 Länder) | Coordination fédérale faible | SR 1.16x (transition) |
+
+**Hypothèse affinée** :
+- Fédéralisme AVEC coordination nationale forte → SIR (réponse homogène)
+- Fédéralisme SANS coordination centrale → SR multi-modes
+- Structure administrative seule ≠ prédicteur
 
 ---
 
