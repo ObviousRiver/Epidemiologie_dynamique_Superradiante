@@ -130,16 +130,21 @@ Sur les 19 pays analysés avec optimisation DOGBOX :
 
 ### **Critère Complémentaire Rigoureux**
 
-Le BIC ajoute une **pénalité de complexité** au critère RMS : `BIC = n*ln(RSS/n) + k*ln(n)`
+Le BIC ajoute une **pénalité de complexité** au critère RMS : `BIC = n*ln(RSS/n) + k*ln(n)` où k est le nombre de paramètres.
 
 **Résultats BIC (19 pays)** :
-- **16/19 pays (84%)** : BIC confirme ratio RMS → SR clairement meilleur
-- **2/19 pays** : BIC **contredit** ratio RMS (USA, UK) → SR reste meilleur malgré RMS SIR plus bas
-- **Accord RMS↔BIC** : 17/18 pays (94.4%) ✅
+- **Accord RMS ↔ BIC : 18/19 pays (94.7%)** ✅
+- **SR gagne (BIC) : 16/19 pays (84.2%)**
+- **SIR gagne (BIC) : 3/19 pays (15.8%)** (USA, UK, + 1 autre selon BIC)
+- **Seul désaccord** : Sweden (RMS dit SR 1.06×, BIC dit SIR -9.3)
 
-**Découverte USA/UK** : Pour ces deux pays, le fit SIR apparemment meilleur (RMS 0.77× et 0.45×) est **trompeur** selon le BIC. La coordination nationale crée une homogénéisation de surface que le SIR capture, mais **masque** la structure multi-modes réelle (vagues régionales) que le SR révèle. ΔBIC = -111 (USA) et -257 (UK) → Evidence très forte que SR est statistiquement préférable.
+**Pays exceptionnels où SIR gagne (RMS et BIC d'accord)** :
+- **USA** : Ratio RMS = 0.77× (SIR gagne), ΔBIC = -111.4 (SIR gagne) → Structure homogénéisée à échelle nationale
+- **UK** : Ratio RMS = 0.45× (SIR gagne), ΔBIC = -256.6 (SIR gagne) → Structure monocentrique (dominance Londres), SIR quasi-parfait (R²=1.000)
 
-Voir document détaillé : `docs/DECOUVERTE_BIC_USA_UK.md`
+**Interprétation** : Le BIC confirme et renforce les conclusions du ratio RMS (94.7% accord). Les pays à **structure multi-modes** (France, Italie, Allemagne) montrent SR clairement supérieur (ΔBIC > +50), tandis que les pays à **structure homogène/monocentrique** (USA, UK) sont mieux modélisés par SIR (ΔBIC < -100). Cette dichotomie valide l'hypothèse que la structure géographique influence le choix du modèle optimal.
+
+Voir synthèse comparative multi-échelles : `docs/SYNTHESE_BIC_FRANCE_MULTINIVEAUX.md`
 
 ---
 

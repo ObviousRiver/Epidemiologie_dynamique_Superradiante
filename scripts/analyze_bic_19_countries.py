@@ -176,18 +176,21 @@ def analyze_country_bic(country_name, population, n_modes=4):
 
     print(f"      ΔBIC (SIR-SR) : {delta_bic:+.2f}", end='')
 
-    # Interprétation ΔBIC
+    # Interprétation ΔBIC (BIC plus petit = meilleur)
+    # ΔBIC = BIC_SIR - BIC_SR
+    # Si ΔBIC > 0 : BIC_SR < BIC_SIR → SR meilleur
+    # Si ΔBIC < 0 : BIC_SIR < BIC_SR → SIR meilleur
     if abs(delta_bic) < 2:
         bic_winner = "Équivalents"
         strength = "Faible"
     elif abs(delta_bic) < 6:
-        bic_winner = "SIR" if delta_bic > 0 else "SR"
+        bic_winner = "SR" if delta_bic > 0 else "SIR"
         strength = "Positive"
     elif abs(delta_bic) < 10:
-        bic_winner = "SIR" if delta_bic > 0 else "SR"
+        bic_winner = "SR" if delta_bic > 0 else "SIR"
         strength = "Forte"
     else:
-        bic_winner = "SIR" if delta_bic > 0 else "SR"
+        bic_winner = "SR" if delta_bic > 0 else "SIR"
         strength = "Très forte"
 
     if bic_winner != "Équivalents":

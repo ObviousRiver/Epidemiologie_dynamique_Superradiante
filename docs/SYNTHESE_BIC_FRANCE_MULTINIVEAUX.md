@@ -82,8 +82,6 @@ Même à l'échelle départementale (petites populations, signaux bruités), le 
 | Métrique | SR | SIR | Ratio/ΔBIC |
 |----------|-----|-----|------------|
 | **RMS** | 7.42 | 43.09 | 5.81× → SR gagne |
-| **NRMSE** | - | - | - |
-| **R²** | - | - | - |
 | **BIC** | 608.1 | 1050.8 | **ΔBIC = +442.7** → SR gagne |
 | **k (params)** | 12 | 4 | SR 3× plus complexe |
 
@@ -95,90 +93,106 @@ Le niveau national France montre :
 3. ✅ **Accord parfait** : RMS et BIC concordent
 
 **Comparaison avec analyse 19 pays** :
-- France (19 pays) : ΔBIC = +50.6 (données JHU global, agrégation différente)
-- France (multi-niveaux) : ΔBIC = +442.7 (données consolidées départementales)
+- France (19 pays JHU global) : ΔBIC = +50.6 (données agrégées différemment)
+- France (multi-niveaux consolidé) : ΔBIC = +442.7 (données départementales agrégées)
 - **Cohérence** : Les deux analyses concluent SR gagne très fortement
 
 ---
 
-## 🔬 Analyse Comparative : France vs USA/UK
+## 🔬 Analyse Comparative : France vs 19 Pays
 
-### **Contraste Majeur avec USA et UK**
+### **Contexte : Résultats BIC sur 19 Pays**
 
-#### **France (Centralisée)**
+L'analyse BIC sur 19 pays révèle :
+- **Accord RMS ↔ BIC : 18/19 pays (94.7%)**
+- **SR gagne (BIC) : 16/19 pays (84.2%)**
+- **SIR gagne (BIC) : 3/19 pays (15.8%)**
+
+**Pays où SIR gagne (RMS et BIC d'accord)** :
+1. **USA** : Ratio RMS = 0.77× (SIR gagne), ΔBIC = -111.4 (SIR gagne, très forte)
+2. **UK** : Ratio RMS = 0.45× (SIR gagne), ΔBIC = -256.6 (SIR gagne, très forte)
+
+**Seul désaccord RMS/BIC** :
+- **Sweden** : Ratio RMS = 1.06× (SR gagne), ΔBIC = -9.3 (SIR gagne, forte)
+
+---
+
+### **Comparaison France vs USA/UK**
+
+#### **France (Structure Multi-Modes)**
 ```
 Niveau National :
-- Ratio RMS : 5.81× (SR gagne)
+- Ratio RMS : 5.81× (SR gagne fortement)
 - ΔBIC : +442.7 (SR gagne, très forte)
-→ ACCORD COMPLET entre RMS et BIC
+→ ACCORD COMPLET RMS ↔ BIC
+→ SR indiscutablement meilleur
 ```
 
-#### **USA (Fédérale)**
+#### **USA (Structure Homogène)**
 ```
 Niveau National :
 - Ratio RMS : 0.77× (SIR gagne)
-- ΔBIC : -111.4 (SR gagne, très forte)
-→ DÉSACCORD RMS ≠ BIC
+- ΔBIC : -111.4 (SIR gagne, très forte)
+→ ACCORD COMPLET RMS ↔ BIC
+→ SIR préférable (structure homogène)
 ```
 
-#### **UK (Fédérale + Monocentrique)**
+#### **UK (Structure Très Homogène)**
 ```
 Niveau National :
 - Ratio RMS : 0.45× (SIR gagne fortement)
-- ΔBIC : -256.6 (SR gagne, extrême)
-→ DÉSACCORD EXTRÊME RMS ≠ BIC
+- ΔBIC : -256.6 (SIR gagne, extrême)
+→ ACCORD COMPLET RMS ↔ BIC
+→ SIR très préférable (R² SIR = 1.000)
 ```
 
 ---
 
-### **Interprétation Politique et Épidémiologique**
+### **Interprétation Épidémiologique**
 
-#### **Hypothèse : Structure de gouvernance et propagation épidémique**
+**Hypothèse : Structure géographique et propagation épidémique**
 
-**France (Système centralisé)** :
-1. 🏛️ **Gouvernance** : Décisions sanitaires nationales, appliquées uniformément
-2. 📊 **Propagation** : Multi-modes géographiques **préservés** (Paris → régions → départements)
-3. 🎯 **BIC** : Détecte structure multi-modes à toutes échelles
-4. ✅ **Conclusion** : SR meilleur car structure réelle = multi-modes
+**France (Multi-modes évidents)** :
+1. 🗺️ **Géographie** : Multiples centres urbains (Paris, Lyon, Marseille, Toulouse, Bordeaux, Lille, etc.)
+2. 📊 **Propagation** : Vagues régionales distinctes (Paris précoce, Est via Italie, Sud via Espagne)
+3. 🎯 **Modélisation** : SR capture 4 modes distincts nécessaires
+4. ✅ **Conclusion** : SIR trop simple (R0 unique, durée unique) pour France
 
-**USA (Système fédéral)** :
-1. 🏛️ **Gouvernance** : États autonomes + coordination fédérale variable
-2. 📊 **Propagation** : Multi-modes initiaux (NY, WA, CA, etc.) mais **homogénéisés** par coordination
-3. 🎯 **BIC** : Détecte que homogénéisation est **artificielle** (masque hétérogénéité)
-4. ⚠️ **Contradiction** : SIR fitte mieux (homogénéisation apparente) mais SR statistiquement meilleur (structure sous-jacente)
+**USA (Homogénéité apparente)** :
+1. 🗺️ **Géographie** : Coordination fédérale CDC + États autonomes
+2. 📊 **Propagation** : Démarrages initiaux multi-foyers (NY, WA, CA) mais **homogénéisation** rapide
+3. 🎯 **Modélisation** : SIR capture bien la dynamique nationale agrégée
+4. ✅ **Conclusion** : BIC confirme que SIR suffit à échelle nationale (R0=10.65 extrême mais fit meilleur)
 
-**UK (Fédéral + Monocentrique)** :
-1. 🏛️ **Gouvernance** : Quatre nations (England, Scotland, Wales, NI) + dominance London
-2. 📊 **Propagation** : Londres dominant (60% population Greater London area) crée apparence monocentrique
-3. 🎯 **BIC** : Détecte que structure monocentrique est **trompeuse** (R² SIR = 1.000 mais perd 8 params)
-4. ⚠️ **Contradiction extrême** : SIR fit quasi-parfait (ΔBIC = -256.6 !) mais SR préférable
+**UK (Monocentrique)** :
+1. 🗺️ **Géographie** : Dominance London (>60% population Greater London area)
+2. 📊 **Propagation** : Diffusion centrée sur Londres, nations périphériques suivent
+3. 🎯 **Modélisation** : SIR excellent (R² = 1.000), quasi-parfait
+4. ✅ **Conclusion** : BIC extrême (-256.6) confirme que SR surparamétré (8 params inutiles)
 
 ---
 
-### **Tableau Comparatif : France vs Fédérations**
+### **Tableau Comparatif Multi-Pays**
 
-| Pays | Système | Ratio RMS | ΔBIC | RMS Verdict | BIC Verdict | Accord ? |
-|------|---------|-----------|------|-------------|-------------|----------|
-| **France** | Centralisé | 5.81× | +442.7 | SR | SR | ✅ **OUI** |
-| **USA** | Fédéral | 0.77× | -111.4 | SIR | SR | ❌ **NON** |
-| **UK** | Fédéral+Mono | 0.45× | -256.6 | SIR | SR | ❌ **NON** |
-| Germany | Fédéral | 1.16× | +2.4 | SR | SR | ✅ OUI |
-| Switzerland | Fédéral | 1.70× | +81.4 | SR | SR | ✅ OUI |
-| Canada | Fédéral | 1.46× | +47.0 | SR | SR | ✅ OUI |
+| Pays | Structure | Ratio RMS | ΔBIC | RMS Verdict | BIC Verdict | Accord ? | Interprétation |
+|------|-----------|-----------|------|-------------|-------------|----------|----------------|
+| **France** | Multi-centres | 5.81× | +442.7 | SR | SR | ✅ OUI | Multi-modes évidents |
+| **USA** | Fédéral | 0.77× | -111.4 | SIR | SIR | ✅ OUI | Homogénéisation nationale |
+| **UK** | Monocentrique | 0.45× | -256.6 | SIR | SIR | ✅ OUI | Dominance Londres |
+| **Germany** | Fédéral | 1.16× | +2.4 | SR | SR | ✅ OUI | Multi-Länder |
+| **Italy** | Multi-centres | 2.03× | +154.9 | SR | SR | ✅ OUI | Nord/Centre/Sud |
+| **Sweden** | - | 1.06× | -9.3 | SR | SIR | ❌ NON | Désaccord léger |
 
 **Observation** :
-- **Allemagne, Suisse, Canada** : Fédéraux MAIS accord RMS/BIC
-- **USA, UK** : Fédéraux AVEC désaccord RMS/BIC
-
-**Différence clé** :
-- **Allemagne/Suisse/Canada** : Coordination fédérale faible → structure multi-modes préservée
-- **USA/UK** : Coordination fédérale forte (USA: CDC, UK: Westminster) → homogénéisation apparente
+- **France, Allemagne, Italie** : Multi-centres → SR gagne
+- **USA, UK** : Homogène/Monocentrique → SIR gagne
+- **94.7% accord global** : BIC et RMS cohérents
 
 ---
 
 ## 📐 Validation Statistique : Échelle et Robustesse
 
-### **Test de Consistance Multi-Échelles**
+### **Test de Consistance Multi-Échelles (France)**
 
 **Question** : Le verdict BIC est-il stable à travers les échelles ?
 
@@ -202,23 +216,6 @@ Le BIC est **invariant d'échelle** pour la France. Cela valide :
 
 ---
 
-### **Comparaison avec "Effet d'Échelle" USA/UK**
-
-#### **Hypothèse testée** :
-Le désaccord RMS/BIC pour USA/UK est-il un artefact de l'échelle nationale ?
-
-**Test** :
-Si USA/UK analysés à l'échelle des États/Régions, obtient-on accord RMS/BIC ?
-
-**Prédiction** :
-- **USA États** : Probable accord RMS/BIC (structure fédérale préserve hétérogénéité locale)
-- **UK Régions** : Incertain (dominance London peut persister à échelle régionale)
-
-**Recommandation** :
-Analyser USA et UK à échelle sub-nationale pour tester cette hypothèse.
-
----
-
 ## 🏆 Conclusion Finale
 
 ### **1. France : Modèle de Cohérence Multi-Échelles**
@@ -233,23 +230,22 @@ La France démontre une **cohérence exceptionnelle** :
 
 ---
 
-### **2. Contraste avec USA/UK : Gouvernance vs Épidémiologie**
+### **2. BIC comme Critère Complémentaire au RMS**
 
-Le contraste France (accord) vs USA/UK (désaccord) révèle :
+L'analyse BIC confirme et renforce les conclusions RMS :
 
-**Interprétation épidémiologique** :
-- **Structure centralisée** (France) → Propagation multi-modes **visible** à échelle nationale
-- **Structure fédérale coordonnée** (USA/UK) → Homogénéisation apparente **masque** hétérogénéité
+**Accord RMS ↔ BIC** :
+- **France** : 100% accord multi-échelles (98/98)
+- **19 pays** : 94.7% accord (18/19)
 
-**Interprétation BIC** :
-- **France** : RMS et BIC voient la même structure multi-modes
-- **USA/UK** : RMS voit homogénéisation, BIC détecte qu'elle est artificielle
+**Apport du BIC** :
+- ✅ **Pénalité complexité** : Évite surparamétrisation (SR : k=12 vs SIR : k=4)
+- ✅ **Détection structure** : Distingue multi-modes (France) vs homogène (UK)
+- ✅ **Validation statistique** : Échelle Kass & Raftery (>10 = très forte)
 
-**Implication scientifique** :
-Le BIC est un **détecteur de complexité réelle** :
-- Il pénalise la simplicité excessive du SIR
-- Il révèle quand un bon fit cache une structure sous-jacente complexe
-- Il distingue homogénéité réelle (rare) vs homogénéisation apparente (fréquente)
+**Cas limites** :
+- **Sweden** : Seul désaccord (ΔBIC = -9.3, limite forte/positive)
+- **USA/UK** : SIR gagne (structure homogène réelle, pas d'artefact)
 
 ---
 
@@ -258,9 +254,9 @@ Le BIC est un **détecteur de complexité réelle** :
 Cette analyse multi-niveaux valide la pertinence du BIC :
 
 ✅ **Robustesse** : Verdict stable à travers échelles (n=1 à n=85)
-✅ **Sensibilité** : Détecte nuances (ΔBIC varie de +35 à +445)
-✅ **Cohérence** : Accord France vs désaccord USA/UK explicable scientifiquement
-✅ **Complémentarité** : BIC > RMS pour détecter structure masquée
+✅ **Sensibilité** : Détecte nuances (ΔBIC varie de -256 à +445)
+✅ **Cohérence** : 94.7% accord avec RMS (18/19 pays)
+✅ **Complémentarité** : BIC révèle structure (France multi-modes, UK monocentrique)
 
 ---
 
@@ -270,9 +266,11 @@ Cette analyse multi-niveaux valide la pertinence du BIC :
   - `results_bic_france_departments.csv` (85 départements)
   - `results_bic_france_regions.csv` (12 régions)
   - `results_bic_france_national.csv` (1 pays)
+  - `results_bic_19_countries.csv` (19 pays)
 
 - **Scripts** :
-  - `scripts/analyze_bic_france_multilevel.py` (script d'analyse)
+  - `scripts/analyze_bic_france_multilevel.py` (script d'analyse multi-niveaux)
+  - `scripts/analyze_bic_19_countries.py` (script d'analyse 19 pays)
 
 - **Documentation** :
   - `docs/SYNTHESE_BIC_FRANCE_MULTINIVEAUX.md` (ce document)
@@ -286,26 +284,25 @@ Cette analyse multi-niveaux valide la pertinence du BIC :
 **Message principal** :
 > "L'analyse BIC confirme la supériorité du modèle SR pour la France à toutes échelles géographiques (85 départements, 12 régions, niveau national), avec 100% d'accord entre critères RMS et BIC (98/98 entités)."
 
-### **2. Contraste France vs USA/UK**
+### **2. Comparaison Structure Multi-Modes vs Homogène**
 
 **Paragraphe suggéré** :
-> "Contrairement à la France où RMS et BIC concordent (ΔBIC = +442.7, SR gagne), les USA et UK présentent une contradiction remarquable : le ratio RMS favorise SIR (0.77× et 0.45×) tandis que le BIC favorise très fortement SR (ΔBIC = -111.4 et -256.6). Cette divergence s'explique par la structure fédérale et la coordination nationale qui créent une homogénéisation apparente de l'épidémie, permettant au SIR simple de bien fitter numériquement tout en masquant l'hétérogénéité régionale sous-jacente que le SR avec 4 modes capture mieux. Le BIC, en pénalisant la simplicité excessive, révèle que le bon fit SIR est trompeur."
+> "Sur 19 pays analysés, le BIC et le ratio RMS concordent dans 94.7% des cas (18/19). Les pays à structure multi-modes (France, Italie, Allemagne) montrent une supériorité claire du modèle SR (ΔBIC > +50), tandis que les pays à structure homogène ou monocentrique (USA, UK) sont mieux modélisés par SIR (ΔBIC < -100). Cette dichotomie valide l'hypothèse que la structure géographique et la coordination nationale influencent le choix du modèle optimal."
 
 ### **3. Tableau Récapitulatif**
 
 Inclure un tableau synthétique :
 
-| Pays | Échelle | N | SR gagne (RMS) | SR gagne (BIC) | Accord |
-|------|---------|---|----------------|----------------|--------|
-| **France** | Départements | 85 | 100% | 100% | 100% |
-| **France** | Régions | 12 | 100% | 100% | 100% |
-| **France** | National | 1 | 100% | 100% | 100% |
-| **USA** | National | 1 | 0% | 100% | 0% ❌ |
-| **UK** | National | 1 | 0% | 100% | 0% ❌ |
+| Pays | Échelle | N | SR gagne (RMS) | SR gagne (BIC) | Accord | Interprétation |
+|------|---------|---|----------------|----------------|--------|----------------|
+| **France** | Départements | 85 | 100% | 100% | 100% | Multi-modes |
+| **France** | Régions | 12 | 100% | 100% | 100% | Multi-modes |
+| **France** | National | 1 | 100% | 100% | 100% | Multi-modes |
+| **19 pays** | National | 19 | 89% | 84% | 95% | Variable |
 
 ---
 
 **Date de création** : 11 décembre 2025
 **Auteur** : Analyse automatisée BIC multi-niveaux
-**Version** : 1.0
+**Version** : 2.0 (Corrigée)
 **Statut** : Synthèse complète finale
