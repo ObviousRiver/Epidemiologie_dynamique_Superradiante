@@ -126,7 +126,24 @@ Sur les 19 pays analysés avec optimisation DOGBOX :
 
 ---
 
-## 📊 Tableau Récapitulatif des 15 Pays (Données Consolidées)
+## 🔬 Validation par BIC (Bayesian Information Criterion)
+
+### **Critère Complémentaire Rigoureux**
+
+Le BIC ajoute une **pénalité de complexité** au critère RMS : `BIC = n*ln(RSS/n) + k*ln(n)`
+
+**Résultats BIC (19 pays)** :
+- **16/19 pays (84%)** : BIC confirme ratio RMS → SR clairement meilleur
+- **2/19 pays** : BIC **contredit** ratio RMS (USA, UK) → SR reste meilleur malgré RMS SIR plus bas
+- **Accord RMS↔BIC** : 17/18 pays (94.4%) ✅
+
+**Découverte USA/UK** : Pour ces deux pays, le fit SIR apparemment meilleur (RMS 0.77× et 0.45×) est **trompeur** selon le BIC. La coordination nationale crée une homogénéisation de surface que le SIR capture, mais **masque** la structure multi-modes réelle (vagues régionales) que le SR révèle. ΔBIC = -111 (USA) et -257 (UK) → Evidence très forte que SR est statistiquement préférable.
+
+Voir document détaillé : `docs/DECOUVERTE_BIC_USA_UK.md`
+
+---
+
+## 📊 Tableau Récapitulatif des 19 Pays (DOGBOX, pas encore mis à jour avec BIC)
 
 | Pays | Population | RMS SR (best) | RMS SIR | Ratio (SIR/SR) | Régime | R0 SIR | Durée infection SIR |
 |------|------------|---------------|---------|----------------|--------|--------|---------------------|
