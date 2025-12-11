@@ -1,0 +1,295 @@
+======================================================================
+ANALYSE BIC COMPLÈTE : 19 PAYS
+Super-Radiant vs SIR - COVID-19 Vague 1 (Fév-Juin 2020)
+======================================================================
+
+======================================================================
+ANALYSE BIC : FRANCE
+======================================================================
+   Données : 137 points, max décès : 975/jour
+
+   📊 SR (4 modes)... RMS=22.58, NRMSE=2.32%, R²=0.994, BIC=913.07
+   🦠 SIR (DOGBOX)... RMS=31.35, NRMSE=3.22%, R²=0.988, BIC=963.70
+              R0=4.72, Durée=15.1j
+
+   🎯 COMPARAISON :
+      Ratio SIR/SR : 1.39× → SR gagne
+      ΔBIC (SIR-SR) : +50.64 → Evidence très forte pour SIR
+
+======================================================================
+ANALYSE BIC : ITALY
+======================================================================
+   Données : 137 points, max décès : 814/jour
+
+   📊 SR (4 modes)... RMS=10.11, NRMSE=1.24%, R²=0.998, BIC=692.97
+   🦠 SIR (DOGBOX)... RMS=20.55, NRMSE=2.52%, R²=0.993, BIC=847.90
+              R0=6.80, Durée=26.5j
+
+   🎯 COMPARAISON :
+      Ratio SIR/SR : 2.03× → SR gagne
+      ΔBIC (SIR-SR) : +154.93 → Evidence très forte pour SIR
+
+======================================================================
+ANALYSE BIC : GERMANY
+======================================================================
+   Données : 137 points, max décès : 233/jour
+
+   📊 SR (4 modes)... RMS=5.00, NRMSE=2.15%, R²=0.995, BIC=499.89
+   🦠 SIR (DOGBOX)... RMS=5.82, NRMSE=2.50%, R²=0.994, BIC=502.33
+              R0=3.81, Durée=16.1j
+
+   🎯 COMPARAISON :
+      Ratio SIR/SR : 1.16× → SR gagne
+      ΔBIC (SIR-SR) : +2.43 → Evidence positive pour SIR
+
+======================================================================
+ANALYSE BIC : SPAIN
+======================================================================
+   Données : 137 points, max décès : 866/jour
+
+   📊 SR (4 modes)... RMS=28.44, NRMSE=3.29%, R²=0.988, BIC=976.35
+   🦠 SIR (DOGBOX)... RMS=41.71, NRMSE=4.82%, R²=0.974, BIC=1041.90
+              R0=8.61, Durée=23.0j
+
+   🎯 COMPARAISON :
+      Ratio SIR/SR : 1.47× → SR gagne
+      ΔBIC (SIR-SR) : +65.55 → Evidence très forte pour SIR
+
+======================================================================
+ANALYSE BIC : UK
+======================================================================
+   ⚠️  SKIP : Données insuffisantes (max décès quotidiens < 1)
+
+======================================================================
+ANALYSE BIC : BELGIUM
+======================================================================
+   Données : 137 points, max décès : 333/jour
+
+   📊 SR (3 modes)... RMS=8.01, NRMSE=2.40%, R²=0.993, BIC=614.24
+   🦠 SIR (DOGBOX)... RMS=9.88, NRMSE=2.96%, R²=0.989, BIC=647.16
+              R0=4.27, Durée=13.6j
+
+   🎯 COMPARAISON :
+      Ratio SIR/SR : 1.23× → SR gagne
+      ΔBIC (SIR-SR) : +32.92 → Evidence très forte pour SIR
+
+======================================================================
+ANALYSE BIC : NETHERLANDS
+======================================================================
+   Données : 137 points, max décès : 154/jour
+
+   📊 SR (4 modes)... RMS=2.58, NRMSE=1.67%, R²=0.997, BIC=318.62
+   🦠 SIR (DOGBOX)... RMS=6.50, NRMSE=4.21%, R²=0.984, BIC=532.35
+              R0=4.79, Durée=19.2j
+
+   🎯 COMPARAISON :
+      Ratio SIR/SR : 2.52× → SR gagne
+      ΔBIC (SIR-SR) : +213.73 → Evidence très forte pour SIR
+
+======================================================================
+ANALYSE BIC : SWITZERLAND
+======================================================================
+   Données : 137 points, max décès : 57/jour
+
+   📊 SR (4 modes)... RMS=0.55, NRMSE=0.96%, R²=0.999, BIC=-104.50
+   🦠 SIR (DOGBOX)... RMS=1.36, NRMSE=2.37%, R²=0.995, BIC=102.94
+              R0=3.30, Durée=11.1j
+
+   🎯 COMPARAISON :
+      Ratio SIR/SR : 2.46× → SR gagne
+      ΔBIC (SIR-SR) : +207.44 → Evidence très forte pour SIR
+
+======================================================================
+ANALYSE BIC : AUSTRIA
+======================================================================
+   Données : 137 points, max décès : 23/jour
+
+   📊 SR (3 modes)... RMS=0.75, NRMSE=3.19%, R²=0.988, BIC=-35.64
+   🦠 SIR (DOGBOX)... RMS=1.10, NRMSE=4.71%, R²=0.973, BIC=46.86
+              R0=4.59, Durée=16.6j
+
+   🎯 COMPARAISON :
+      Ratio SIR/SR : 1.48× → SR gagne
+      ΔBIC (SIR-SR) : +82.50 → Evidence très forte pour SIR
+
+======================================================================
+ANALYSE BIC : PORTUGAL
+======================================================================
+   Données : 137 points, max décès : 32/jour
+
+   📊 SR (3 modes)... RMS=1.39, NRMSE=4.36%, R²=0.981, BIC=135.33
+   🦠 SIR (DOGBOX)... RMS=2.00, NRMSE=6.25%, R²=0.962, BIC=209.62
+              R0=8.65, Durée=35.4j
+
+   🎯 COMPARAISON :
+      Ratio SIR/SR : 1.43× → SR gagne
+      ΔBIC (SIR-SR) : +74.29 → Evidence très forte pour SIR
+
+======================================================================
+ANALYSE BIC : SWEDEN
+======================================================================
+   Données : 137 points, max décès : 107/jour
+
+   📊 SR (3 modes)... RMS=5.92, NRMSE=5.52%, R²=0.962, BIC=531.77
+   🦠 SIR (DOGBOX)... RMS=6.27, NRMSE=5.83%, R²=0.958, BIC=522.51
+              R0=7.77, Durée=45.9j
+
+   🎯 COMPARAISON :
+      Ratio SIR/SR : 1.06× → SR gagne
+      ΔBIC (SIR-SR) : -9.26 → Evidence forte pour SR
+
+======================================================================
+ANALYSE BIC : NORWAY
+======================================================================
+   Données : 137 points, max décès : 8/jour
+
+   📊 SR (3 modes)... RMS=0.36, NRMSE=4.37%, R²=0.978, BIC=-234.17
+   🦠 SIR (DOGBOX)... RMS=0.47, NRMSE=5.67%, R²=0.962, BIC=-187.15
+              R0=3.29, Durée=10.4j
+
+   🎯 COMPARAISON :
+      Ratio SIR/SR : 1.30× → SR gagne
+      ΔBIC (SIR-SR) : +47.03 → Evidence très forte pour SIR
+
+======================================================================
+ANALYSE BIC : DENMARK
+======================================================================
+   Données : 137 points, max décès : 16/jour
+
+   📊 SR (3 modes)... RMS=0.57, NRMSE=3.49%, R²=0.987, BIC=-110.58
+   🦠 SIR (DOGBOX)... RMS=0.81, NRMSE=4.98%, R²=0.973, BIC=-37.93
+              R0=6.67, Durée=23.6j
+
+   🎯 COMPARAISON :
+      Ratio SIR/SR : 1.43× → SR gagne
+      ΔBIC (SIR-SR) : +72.65 → Evidence très forte pour SIR
+
+======================================================================
+ANALYSE BIC : FINLAND
+======================================================================
+   Données : 137 points, max décès : 10/jour
+
+   📊 SR (3 modes)... RMS=0.37, NRMSE=3.58%, R²=0.985, BIC=-229.57
+   🦠 SIR (DOGBOX)... RMS=0.62, NRMSE=6.03%, R²=0.958, BIC=-110.99
+              R0=2.08, Durée=6.8j
+
+   🎯 COMPARAISON :
+      Ratio SIR/SR : 1.69× → SR gagne
+      ΔBIC (SIR-SR) : +118.59 → Evidence très forte pour SIR
+
+======================================================================
+ANALYSE BIC : IRELAND
+======================================================================
+   Données : 137 points, max décès : 70/jour
+
+   📊 SR (3 modes)... RMS=2.46, NRMSE=3.50%, R²=0.979, BIC=291.10
+   🦠 SIR (DOGBOX)... RMS=4.75, NRMSE=6.75%, R²=0.920, BIC=446.34
+              R0=1.66, Durée=4.6j
+
+   🎯 COMPARAISON :
+      Ratio SIR/SR : 1.93× → SR gagne
+      ΔBIC (SIR-SR) : +155.24 → Evidence très forte pour SIR
+
+======================================================================
+ANALYSE BIC : CANADA
+======================================================================
+   Données : 137 points, max décès : 191/jour
+
+   📊 SR (4 modes)... RMS=3.69, NRMSE=1.93%, R²=0.997, BIC=416.82
+   🦠 SIR (DOGBOX)... RMS=6.35, NRMSE=3.33%, R²=0.990, BIC=526.01
+              R0=3.21, Durée=17.1j
+
+   🎯 COMPARAISON :
+      Ratio SIR/SR : 1.72× → SR gagne
+      ΔBIC (SIR-SR) : +109.19 → Evidence très forte pour SIR
+
+======================================================================
+ANALYSE BIC : US
+======================================================================
+   Données : 137 points, max décès : 2235/jour
+
+   📊 SR (4 modes)... RMS=68.20, NRMSE=3.05%, R²=0.992, BIC=1216.01
+   🦠 SIR (DOGBOX)... RMS=52.44, NRMSE=2.35%, R²=0.995, BIC=1104.61
+              R0=10.65, Durée=44.1j
+
+   🎯 COMPARAISON :
+      Ratio SIR/SR : 0.77× → SIR gagne
+      ΔBIC (SIR-SR) : -111.40 → Evidence très forte pour SR
+
+======================================================================
+ANALYSE BIC : AUSTRALIA
+======================================================================
+   Données : 137 points, max décès : 4/jour
+
+   📊 SR (3 modes)... RMS=0.19, NRMSE=4.53%, R²=0.966, BIC=-404.58
+   🦠 SIR (DOGBOX)... RMS=0.48, NRMSE=11.27%, R²=0.787, BIC=-179.69
+              R0=6.52, Durée=17.7j
+
+   🎯 COMPARAISON :
+      Ratio SIR/SR : 2.49× → SR gagne
+      ΔBIC (SIR-SR) : +224.89 → Evidence très forte pour SIR
+
+======================================================================
+ANALYSE BIC : NEW ZEALAND
+======================================================================
+   Données : 137 points, max décès : 1/jour
+
+   📊 SR (2 modes)... RMS=0.08, NRMSE=6.67%, R²=0.938, BIC=-675.69
+   🦠 SIR (DOGBOX)... RMS=0.08, NRMSE=7.11%, R²=0.930, BIC=-668.21
+              R0=1.87, Durée=3.4j
+
+   🎯 COMPARAISON :
+      Ratio SIR/SR : 1.07× → SR gagne
+      ΔBIC (SIR-SR) : +7.48 → Evidence forte pour SIR
+
+✅ Résultats sauvegardés : results_bic_19_countries.csv
+
+======================================================================
+TABLEAU RÉCAPITULATIF : BIC vs RATIO RMS
+======================================================================
+
+Pays               Ratio     ΔBIC   RMS Conclusion       BIC Conclusion
+----------------------------------------------------------------------
+Australia          2.49×   +224.9         SR gagne     SIR (très forte)
+Netherlands        2.52×   +213.7         SR gagne     SIR (très forte)
+Switzerland        2.46×   +207.4         SR gagne     SIR (très forte)
+Ireland            1.93×   +155.2         SR gagne     SIR (très forte)
+Italy              2.03×   +154.9         SR gagne     SIR (très forte)
+Finland            1.69×   +118.6         SR gagne     SIR (très forte)
+Canada             1.72×   +109.2         SR gagne     SIR (très forte)
+Austria            1.48×    +82.5         SR gagne     SIR (très forte)
+Portugal           1.43×    +74.3         SR gagne     SIR (très forte)
+Denmark            1.43×    +72.6         SR gagne     SIR (très forte)
+Spain              1.47×    +65.6         SR gagne     SIR (très forte)
+France             1.39×    +50.6         SR gagne     SIR (très forte)
+Norway             1.30×    +47.0         SR gagne     SIR (très forte)
+Belgium            1.23×    +32.9         SR gagne     SIR (très forte)
+New Zealand        1.07×     +7.5         SR gagne          SIR (forte)
+Germany            1.16×     +2.4         SR gagne       SIR (positive)
+Sweden             1.06×     -9.3         SR gagne           SR (forte)
+US                 0.77×   -111.4        SIR gagne      SR (très forte)
+
+======================================================================
+STATISTIQUES GLOBALES
+======================================================================
+
+📊 VERDICT RATIO RMS :
+   SR gagne : 17/18 pays (94.4%)
+   SIR gagne : 1/18 pays (5.6%)
+
+📊 VERDICT BIC (|ΔBIC| > 2) :
+   SR gagne : 16/18 pays (88.9%)
+   SIR gagne : 2/18 pays (11.1%)
+   Équivalents : 0/18 pays (0.0%)
+
+🔍 ACCORD RATIO RMS ↔ BIC :
+   Accord : 17/18 pays (94.4%)
+   Désaccord : 1/18 pays (5.6%)
+
+🏆 ΔBIC EXTRÊMES :
+   Plus favorable SR : Australia (ΔBIC = +224.9)
+   Plus favorable SIR : US (ΔBIC = -111.4)
+
+======================================================================
+✅ ANALYSE COMPLÈTE TERMINÉE
+======================================================================
