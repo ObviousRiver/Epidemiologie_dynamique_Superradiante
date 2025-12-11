@@ -70,20 +70,26 @@ Centralisation/Précoce     →    Régime Classique SIR
 
 ### Validation par BIC (Bayesian Information Criterion)
 
-Le **BIC pénalise la complexité** du modèle selon la formule : `BIC = n*ln(RSS/n) + k*ln(n)`
+Le **BIC pénalise la complexité** du modèle selon la formule : `BIC = n*ln(RSS/n) + k*ln(n)` où k est le nombre de paramètres.
 
 **Résultats BIC sur les 19 pays** :
-- **16/19 pays (84%)** : BIC confirme le ratio RMS → SR clairement meilleur
-- **2/19 pays** : BIC **contredit** le ratio RMS (USA, UK) :
+- **Accord RMS ↔ BIC : 18/19 pays (94.7%)**
+- **SR gagne (BIC) : 16/19 pays (84.2%)**
+- **SIR gagne (BIC) : 3/19 pays (15.8%)**
+
+**Pays exceptionnels où SIR gagne (RMS et BIC d'accord)** :
 
 | Pays | Ratio RMS | Verdict RMS | ΔBIC | Verdict BIC | Interprétation |
 |------|-----------|-------------|------|-------------|----------------|
-| **USA** | 0.77× | SIR gagne | **-111.4** | **SR gagne** | SIR fitte mieux (+23%) mais SR statistiquement préférable (capture mieux la structure fédérale hétérogène). Paramètres SIR suspects : R0=10.65, Durée=44.1j |
-| **UK** | 0.45× | SIR gagne | **-256.6** | **SR gagne** | Malgré fit SIR quasi-parfait (R²=1.000), BIC favorise SR (détecte que simplicité SIR masque hétérogénéité régionale réelle : Londres, Midlands, Nord, Écosse) |
+| **USA** | 0.77× | SIR gagne | **-111.4** | **SIR gagne** | Structure homogénéisée à échelle nationale. SIR capture bien la dynamique agrégée malgré démarrages multi-foyers initiaux (NY, WA, CA). Paramètres : R0=10.65, Durée=44.1j |
+| **UK** | 0.45× | SIR gagne | **-256.6** | **SIR gagne** | Structure monocentrique (dominance Londres). SIR quasi-parfait (R²=1.000). BIC extrême (-256.6) confirme que SR surparamétré pour cette configuration. |
 
-**Interprétation** : Pour USA et UK, le fit apparemment meilleur du SIR est **trompeur**. La structure fédérale + coordination nationale crée une homogénéisation de surface que le SIR simple capture bien, mais **masque** la structure multi-modes sous-jacente (vagues régionales décalées) que le SR révèle. Le BIC, en pénalisant la perte de paramètres, détecte cette simplification excessive.
+**Seul désaccord RMS/BIC** :
+- **Sweden** : Ratio RMS = 1.06× (SR gagne légèrement), ΔBIC = -9.3 (SIR gagne)
 
-**Conclusion validée** : Pour **84% des pays**, les deux critères concordent (SR meilleur). Pour USA/UK, le BIC apporte une **nuance scientifiquement rigoureuse** : SR reste le meilleur modèle même si SIR fitte mieux numériquement.
+**Interprétation** : Le BIC confirme et **renforce** les conclusions du ratio RMS. Pour 94.7% des pays, les deux critères concordent. Les pays à **structure multi-modes** (France, Italie, Allemagne) montrent SR clairement supérieur (ΔBIC > +50), tandis que les pays à **structure homogène/monocentrique** (USA, UK) sont mieux modélisés par SIR (ΔBIC < -100). Cette dichotomie valide l'hypothèse que la structure géographique influence le choix du modèle optimal.
+
+**Conclusion validée** : Le BIC apporte une **validation statistique rigoureuse** : il pénalise la complexité tout en récompensant la qualité du fit, évitant ainsi le surparamétrage. Pour la France et 15 autres pays, SR reste le meilleur modèle par les deux critères.
 
 ---
 
