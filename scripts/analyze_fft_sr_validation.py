@@ -149,15 +149,23 @@ def compute_fft_spectrum(signal, dt=1.0, n_fft=None, apply_window=True):
     # Retirer la moyenne (detrending) pour éliminer composante DC
     signal_detrended = signal - np.mean(signal)
 
-    # Appliquer fenêtrage
-    if apply_window:
-        signal_windowed = apply_hanning_window(signal_detrended)
-    else:
-        signal_windowed = signal_detrended.copy()
-
-    # Zero-padding si nécessaire
+    # Déterminer taille FFT
     if n_fft is None:
-        n_fft = len(signal_windowed)
+        n_fft = len(signal_detrended)
+
+    # Zero-padding AVANT fenêtrage (si nécessaire)
+    if n_fft > len(signal_detrended):
+        signal_padded = np.zeros(n_fft)
+        signal_padded[:len(signal_detrended)] = signal_detrended
+    else:
+        signal_padded = signal_detrended
+
+    # Appliquer fenêtrage SUR LA TAILLE FINALE (après zero-padding)
+    if apply_window:
+        window = windows.hann(n_fft)
+        signal_windowed = signal_padded * window
+    else:
+        signal_windowed = signal_padded
 
     # FFT
     spectrum = fft(signal_windowed, n=n_fft)
@@ -208,26 +216,58 @@ def identify_peaks(freqs, spectrum, prominence_factor=0.1, min_distance=5):
 
 
 def plot_fft_comparison(freqs_real, spectrum_real, freqs_sr, spectrum_sr,
-                        peaks_real, peaks_sr, entity_name="France"):
+                        peaks_real, peaks_sr, entity_name="France",
+                        freqs_real_256=None, spectrum_real_256=None):
     """
     Génère le graphique de comparaison des spectres FFT.
 
     Args:
-        freqs_real: Fréquences données réelles
-        spectrum_real: Spectre données réelles
+        freqs_real: Fréquences données réelles (128 pts)
+        spectrum_real: Spectre données réelles (128 pts)
         freqs_sr: Fréquences fit SR
         spectrum_sr: Spectre fit SR
         peaks_real: (freqs, amps, periods) pics données réelles
         peaks_sr: (freqs, amps, periods) pics fit SR
         entity_name: Nom de l'entité analysée
+        freqs_real_256: Fréquences données réelles (256 pts, optional)
+        spectrum_real_256: Spectre données réelles (256 pts, optional)
     """
 
-    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(14, 10))
+    # Si comparaison 256 vs 128, faire 3 subplots, sinon 2
+    n_plots = 3 if freqs_real_256 is not None else 2
+    fig, axes = plt.subplots(n_plots, 1, figsize=(14, 5*n_plots))
+
+    if n_plots == 2:
+        ax1, ax2 = axes
+    else:
+        ax_comp, ax1, ax2 = axes
+
+    # ========== Graphique 0 : Comparaison 256 vs 128 (si disponible) ==========
+
+    if freqs_real_256 is not None:
+        ax_comp.plot(freqs_real_256, spectrum_real_256, 'b-', alpha=0.5, linewidth=1.5,
+                     label='Zero-padding 256 pts (119 zéros ajoutés)')
+        ax_comp.plot(freqs_real, spectrum_real, 'g-', alpha=0.8, linewidth=2,
+                     label='128 pts sans zero-padding (9 pts retirés)')
+
+        ax_comp.set_xlabel('Fréquence (1/jours)', fontsize=12)
+        ax_comp.set_ylabel('Amplitude FFT', fontsize=12)
+        ax_comp.set_title(f'Comparaison Méthodes FFT : {entity_name} (Zero-padding vs Troncature)',
+                          fontsize=14, fontweight='bold')
+        ax_comp.legend(loc='upper right', fontsize=10)
+        ax_comp.grid(True, alpha=0.3)
+        ax_comp.set_xlim(0, 0.15)
+
+        # Annotation
+        ax_comp.text(0.98, 0.95, 'Méthode sans zero-padding\nrecommandée (plus propre)',
+                     transform=ax_comp.transAxes, fontsize=10,
+                     verticalalignment='top', horizontalalignment='right',
+                     bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))
 
     # ========== Graphique 1 : Spectres superposés (échelle linéaire) ==========
 
     ax1.plot(freqs_real, spectrum_real, 'b-', alpha=0.6, linewidth=1.5,
-             label='FFT Données Réelles (137 pts → 256 FFT)')
+             label='FFT Données Réelles (128 pts, sans zero-padding)')
     ax1.plot(freqs_sr, spectrum_sr, 'r-', alpha=0.8, linewidth=1.2,
              label='FFT Fit SR (2048 pts)')
 
@@ -254,7 +294,7 @@ def plot_fft_comparison(freqs_real, spectrum_real, freqs_sr, spectrum_sr,
 
     ax1.set_xlabel('Fréquence (1/jours)', fontsize=12)
     ax1.set_ylabel('Amplitude FFT', fontsize=12)
-    ax1.set_title(f'Comparaison Spectres FFT : {entity_name} (Échelle Linéaire)',
+    ax1.set_title(f'Validation Fit SR : Spectres FFT {entity_name} (Données Réelles vs Fit SR)',
                   fontsize=14, fontweight='bold')
     ax1.legend(loc='upper right', fontsize=10)
     ax1.grid(True, alpha=0.3)
@@ -379,25 +419,48 @@ def main():
     print(f"  Résolution fréquentielle ≈ {1.0/(N_SR_FFT*dt_sr_fine):.6f} jour⁻¹")
     print()
 
-    # ========== 4. Calculer FFT données réelles ==========
-    print("📊 FFT DONNÉES RÉELLES")
+    # ========== 4. Calculer FFT données réelles (DEUX MÉTHODES) ==========
+    print("📊 FFT DONNÉES RÉELLES - MÉTHODE COMPARATIVE")
     print("-" * 70)
 
-    freqs_real, spectrum_real = compute_fft_spectrum(
-        y_data, dt=dt, n_fft=N_REAL_FFT, apply_window=True
+    # MÉTHODE 1 : Zero-padding à 256 (2^8)
+    print("\n  🔵 MÉTHODE 1 : Zero-padding à 256 points (2^8)")
+    freqs_real_256, spectrum_real_256 = compute_fft_spectrum(
+        y_data, dt=dt, n_fft=256, apply_window=True
     )
+    print(f"     Données : 137 points → 256 FFT (119 zéros ajoutés)")
+    print(f"     Fenêtrage : Hanning appliqué sur 256 points (APRÈS zero-padding)")
+    print(f"     Résolution fréquentielle = {freqs_real_256[1]:.6f} jour⁻¹")
+    print(f"     Max amplitude = {spectrum_real_256.max():.2f} à f={freqs_real_256[spectrum_real_256.argmax()]:.6f} jour⁻¹")
 
-    print(f"  Fenêtrage : Hanning")
-    print(f"  Taille FFT : {N_REAL_FFT} (2^8, zero-padding)")
-    print(f"  Résolution fréquentielle = {freqs_real[1]:.6f} jour⁻¹")
-    print(f"  Plage fréquences : [{freqs_real.min():.6f}, {freqs_real.max():.6f}] jour⁻¹")
-    print(f"  Max amplitude = {spectrum_real.max():.2f} à f={freqs_real[spectrum_real.argmax()]:.6f} jour⁻¹")
+    # MÉTHODE 2 : Troncature à 128 points (2^7, SANS zero-padding)
+    print("\n  🟢 MÉTHODE 2 : Troncature à 128 points (2^7, SANS zero-padding)")
+    y_data_128 = y_data[:128]  # Retirer les 9 derniers points
+    t_data_128 = t_data[:128]
+    freqs_real_128, spectrum_real_128 = compute_fft_spectrum(
+        y_data_128, dt=dt, n_fft=128, apply_window=True
+    )
+    print(f"     Données : 128 points (9 derniers points retirés)")
+    print(f"     Fenêtrage : Hanning appliqué sur 128 points (SANS zero-padding)")
+    print(f"     Résolution fréquentielle = {freqs_real_128[1]:.6f} jour⁻¹")
+    print(f"     Max amplitude = {spectrum_real_128.max():.2f} à f={freqs_real_128[spectrum_real_128.argmax()]:.6f} jour⁻¹")
 
-    # Debug : afficher le top 5 des amplitudes
-    top_indices = np.argsort(spectrum_real)[-5:][::-1]
-    print(f"  Top 5 amplitudes :")
-    for idx in top_indices:
-        print(f"    f={freqs_real[idx]:.6f} jour⁻¹, T={1/freqs_real[idx] if freqs_real[idx] > 0 else np.inf:.1f}j, Amp={spectrum_real[idx]:.1f}")
+    # Comparaison Top 5 pour les deux méthodes
+    print("\n  📊 Comparaison Top 5 amplitudes :")
+    print("\n    Méthode 1 (256 pts, zero-padding) :")
+    top_indices_256 = np.argsort(spectrum_real_256)[-5:][::-1]
+    for idx in top_indices_256:
+        print(f"      f={freqs_real_256[idx]:.6f} jour⁻¹, T={1/freqs_real_256[idx] if freqs_real_256[idx] > 0 else np.inf:.1f}j, Amp={spectrum_real_256[idx]:.1f}")
+
+    print("\n    Méthode 2 (128 pts, sans zero-padding) :")
+    top_indices_128 = np.argsort(spectrum_real_128)[-5:][::-1]
+    for idx in top_indices_128:
+        print(f"      f={freqs_real_128[idx]:.6f} jour⁻¹, T={1/freqs_real_128[idx] if freqs_real_128[idx] > 0 else np.inf:.1f}j, Amp={spectrum_real_128[idx]:.1f}")
+
+    # Utiliser la méthode 128 points pour la suite (plus propre)
+    freqs_real = freqs_real_128
+    spectrum_real = spectrum_real_128
+    print("\n  ➡️  Suite de l'analyse avec MÉTHODE 2 (128 pts, plus propre)")
     print()
 
     # ========== 5. Calculer FFT fit SR ==========
@@ -478,7 +541,9 @@ def main():
         freqs_real, spectrum_real,
         freqs_sr, spectrum_sr,
         peaks_real, peaks_sr,
-        entity_name="France"
+        entity_name="France",
+        freqs_real_256=freqs_real_256,
+        spectrum_real_256=spectrum_real_256
     )
 
     print()
