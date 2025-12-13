@@ -27,8 +27,43 @@ from scipy.stats import pearsonr
 import sys
 
 sys.path.insert(0, 'src/core')
-from data_loader import load_country_data
 from models import SuperRadiantModel
+
+
+def load_country_data_direct(country_name):
+    """
+    Charge les données COVID depuis Johns Hopkins GitHub (sans API Kaggle).
+
+    Args:
+        country_name: Nom du pays
+
+    Returns:
+        DataFrame avec colonnes 'new_deaths' et index datetime
+    """
+    # URL Johns Hopkins
+    url_deaths = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"
+
+    # Charger
+    df = pd.read_csv(url_deaths)
+
+    # Filtrer pays
+    country_data = df[df['Country/Region'] == country_name]
+
+    if len(country_data) == 0:
+        raise ValueError(f"Pays '{country_name}' non trouvé")
+
+    # Agréger sur provinces si nécessaire
+    cumul_deaths = country_data.iloc[:, 4:].sum(axis=0)
+
+    # Créer DataFrame avec dates
+    result = pd.DataFrame({'deaths': cumul_deaths})
+    result.index = pd.to_datetime(result.index, format='%m/%d/%y')
+
+    # Calculer nouveaux décès
+    result['new_deaths'] = result['deaths'].diff().fillna(0)
+    result['new_deaths'] = result['new_deaths'].clip(lower=0)  # Pas de valeurs négatives
+
+    return result
 
 
 def calculate_susceptibility(signal, window=14):
@@ -102,7 +137,7 @@ def analyze_nucleation_timing(country_name, start_date, end_date, window=14):
         results: Dictionnaire avec timing, Δt, et métriques
     """
     # Charger données
-    df = load_country_data(country_name)
+    df = load_country_data_direct(country_name)
     df = df.loc[start_date:end_date]
 
     if len(df) < window * 2:
