@@ -134,7 +134,8 @@ def fit_power_law(t, chi):
 def compute_gamma_2d_scalogram(t_data, signal_sr,
                                 window_chi_values=[7, 10, 14, 21, 28, 40, 60],
                                 window_gamma=30,
-                                step_gamma=5):
+                                step_gamma=5,
+                                normalize=False):
     """
     Calcule γ(t, window_χ) pour différentes fenêtres χ.
 
@@ -144,10 +145,19 @@ def compute_gamma_2d_scalogram(t_data, signal_sr,
         window_chi_values: Liste de fenêtres pour χ (en jours)
         window_gamma: Taille fenêtre pour fit γ local
         step_gamma: Pas de déplacement
+        normalize: Si True, normalise signal_sr avant calcul χ (intensité uniquement)
 
     Returns:
         scalogram: dict avec structure γ(t, window)
     """
+    # Normalisation en intensité (optionnelle)
+    if normalize:
+        signal_max = np.max(signal_sr)
+        if signal_max > 0:
+            signal_sr = signal_sr / signal_max
+        else:
+            print("    ⚠️  Signal SR max = 0, normalisation impossible")
+            normalize = False
     scalogram = {
         'windows': window_chi_values,
         'gamma_maps': {},  # {window: (t_centers, gammas, r2s)}
@@ -376,12 +386,17 @@ def plot_2d_scalogram(country, dates, t_data, deaths_sr, scalogram, markers, out
 def analyze_country_scalogram(country, start_date, end_date,
                                window_chi_values=[7, 10, 14, 21, 28, 40, 60],
                                window_gamma=30,
-                               step_gamma=5):
+                               step_gamma=5,
+                               normalize=False):
     """
     Analyse scalogramme 2D γ(t, window) pour un pays.
+
+    Args:
+        normalize: Si True, normalise SR en intensité avant calcul χ
     """
+    norm_str = "NORMALISÉ" if normalize else "BRUT"
     print(f"\n{'='*80}")
-    print(f"Analyse scalogramme 2D: {country}")
+    print(f"Analyse scalogramme 2D: {country} [{norm_str}]")
     print(f"{'='*80}")
 
     # 1. Charger données
@@ -391,8 +406,8 @@ def analyze_country_scalogram(country, start_date, end_date,
     deaths_real = data['deaths']
     dates = data['dates']
 
-    # 2. Fit SR (SANS normalisation)
-    print(f"  Fitting SR model (brut, sans normalisation)...")
+    # 2. Fit SR
+    print(f"  Fitting SR model...")
     sr_model = SuperRadiantModel(n_modes=3)
     try:
         sr_model.fit(t_data, deaths_real)
@@ -402,8 +417,9 @@ def analyze_country_scalogram(country, start_date, end_date,
         print(f"    ❌ SR fit failed: {e}")
         return None
 
-    # 3. Scalogramme γ(t, window_χ)
-    print(f"  Computing γ(t, window) scalogram...")
+    # 3. Scalogramme γ(t, window_χ) avec option normalisation
+    norm_msg = "SR normalisé I/max" if normalize else "SR brut"
+    print(f"  Computing γ(t, window) scalogram [{norm_msg}]...")
     print(f"    Fenêtres χ testées: {window_chi_values}")
     print(f"    Fenêtre γ: {window_gamma}j, pas: {step_gamma}j")
 
@@ -411,7 +427,8 @@ def analyze_country_scalogram(country, start_date, end_date,
         t_data, deaths_sr,
         window_chi_values=window_chi_values,
         window_gamma=window_gamma,
-        step_gamma=step_gamma
+        step_gamma=step_gamma,
+        normalize=normalize
     )
 
     # 4. Repérage temporel
@@ -438,7 +455,8 @@ def analyze_country_scalogram(country, start_date, end_date,
 
     # 6. Visualisation
     print(f"\n  Plotting scalogram...")
-    output_dir = "results/gamma_scalogram_2d"
+    suffix = "_normalized" if normalize else "_raw"
+    output_dir = f"results/gamma_scalogram_2d{suffix}"
     os.makedirs(output_dir, exist_ok=True)
 
     plot_2d_scalogram(country, dates, t_data, deaths_sr, scalogram, markers, output_dir)
@@ -455,63 +473,103 @@ def analyze_country_scalogram(country, start_date, end_date,
 
 def main():
     print("="*80)
-    print("ANALYSE SCALOGRAMME 2D: γ(t, window)")
+    print("ANALYSE SCALOGRAMME 2D: γ(t, window) - COMPARAISON BRUT vs NORMALISÉ")
     print("="*80)
     print()
     print("Méthodologie:")
-    print("  - Modèle SR BRUT (sans normalisation)")
+    print("  - Modèle SR: deux versions testées")
+    print("    * BRUT: Signal SR sans modification")
+    print("    * NORMALISÉ: Signal SR / max(SR) pour comparaison inter-pays")
     print("  - χ(t) calculé pour différentes fenêtres")
     print("  - γ(t) extrait par fenêtre glissante")
     print("  - Heatmap 2D temps × fenêtre (scalogramme)")
     print("  - Repérage t_pic(I), t_pic(χ), Δt")
-    print("  - Recherche d'îlots dimensionnels, patterns répétitifs")
+    print("  - Comparaison systématique brut vs normalisé")
     print()
 
-    # Pays tests
+    # 19 pays européens - Vague 1
     test_cases = [
         ("Italy", "2020-02-15", "2020-08-31"),
         ("France", "2020-02-15", "2020-08-31"),
         ("United Kingdom", "2020-02-15", "2020-08-31"),
+        ("Spain", "2020-02-15", "2020-08-31"),
+        ("Germany", "2020-02-15", "2020-08-31"),
+        ("Belgium", "2020-02-15", "2020-08-31"),
+        ("Netherlands", "2020-02-15", "2020-08-31"),
+        ("Switzerland", "2020-02-15", "2020-08-31"),
+        ("Portugal", "2020-02-15", "2020-08-31"),
+        ("Austria", "2020-02-15", "2020-08-31"),
+        ("Sweden", "2020-02-15", "2020-08-31"),
+        ("Norway", "2020-02-15", "2020-08-31"),
+        ("Denmark", "2020-02-15", "2020-08-31"),
+        ("Finland", "2020-02-15", "2020-08-31"),
+        ("Ireland", "2020-02-15", "2020-08-31"),
+        ("Greece", "2020-02-15", "2020-08-31"),
+        ("Poland", "2020-02-15", "2020-08-31"),
+        ("Romania", "2020-02-15", "2020-08-31"),
+        ("Czechia", "2020-02-15", "2020-08-31"),
     ]
 
     # Paramètres - ZOOM sur zone critique [2-20j] par pas de 1j
-    # Analyse dense comme FFT haute résolution
     WINDOW_CHI_VALUES = list(range(2, 21))  # [2, 3, 4, ..., 19, 20]
     WINDOW_GAMMA = 30  # Fenêtre pour fit γ local
-    STEP_GAMMA = 3     # Pas de déplacement (plus fin pour capturer détails)
+    STEP_GAMMA = 3     # Pas de déplacement
 
     print(f"Paramètres - ZOOM haute résolution:")
-    print(f"  - Fenêtres χ testées: {len(WINDOW_CHI_VALUES)} valeurs de {WINDOW_CHI_VALUES[0]}j à {WINDOW_CHI_VALUES[-1]}j")
-    print(f"  - Résolution: 1 jour (analyse dense type FFT)")
-    print(f"  - Fenêtre fit γ: {WINDOW_GAMMA}j")
-    print(f"  - Pas déplacement: {STEP_GAMMA}j")
+    print(f"  - {len(test_cases)} pays européens")
+    print(f"  - Fenêtres χ: {len(WINDOW_CHI_VALUES)} valeurs [{WINDOW_CHI_VALUES[0]}-{WINDOW_CHI_VALUES[-1]}j]")
+    print(f"  - Fenêtre fit γ: {WINDOW_GAMMA}j, pas: {STEP_GAMMA}j")
     print()
 
-    results = []
+    # RUN 1: SR BRUT
+    print(f"\n{'#'*80}")
+    print(f"# RUN 1: SR BRUT (sans normalisation)")
+    print(f"{'#'*80}\n")
 
+    results_raw = []
     for country, start, end in test_cases:
         result = analyze_country_scalogram(
             country, start, end,
             window_chi_values=WINDOW_CHI_VALUES,
             window_gamma=WINDOW_GAMMA,
-            step_gamma=STEP_GAMMA
+            step_gamma=STEP_GAMMA,
+            normalize=False
         )
-
         if result is not None:
-            results.append(result)
+            results_raw.append(result)
 
-    # Synthèse
-    if len(results) > 0:
-        print(f"\n{'='*80}")
-        print(f"SYNTHÈSE - {len(results)} PAYS ANALYSÉS")
-        print(f"{'='*80}\n")
+    # RUN 2: SR NORMALISÉ
+    print(f"\n{'#'*80}")
+    print(f"# RUN 2: SR NORMALISÉ (I_SR / max)")
+    print(f"{'#'*80}\n")
 
-        print("Observations:")
-        print("  - Scalogrammes 2D générés pour chaque pays")
-        print("  - Repérage systématique des temps caractéristiques")
-        print("  - Analyse dépendance γ(window)")
-        print()
-        print(f"📁 Figures: results/gamma_scalogram_2d/*.png")
+    results_normalized = []
+    for country, start, end in test_cases:
+        result = analyze_country_scalogram(
+            country, start, end,
+            window_chi_values=WINDOW_CHI_VALUES,
+            window_gamma=WINDOW_GAMMA,
+            step_gamma=STEP_GAMMA,
+            normalize=True
+        )
+        if result is not None:
+            results_normalized.append(result)
+
+    # Synthèse comparative
+    print(f"\n{'='*80}")
+    print(f"SYNTHÈSE COMPARATIVE - {len(results_raw)} pays")
+    print(f"{'='*80}\n")
+
+    print(f"✅ Scalogrammes générés:")
+    print(f"  - SR BRUT: results/gamma_scalogram_2d_raw/*.png ({len(results_raw)} pays)")
+    print(f"  - SR NORMALISÉ: results/gamma_scalogram_2d_normalized/*.png ({len(results_normalized)} pays)")
+    print()
+    print(f"📊 Pour comparer:")
+    print(f"  - Plateau optimal identifié pour chaque pays")
+    print(f"  - Variation γ(window) brut vs normalisé")
+    print(f"  - Δt(window) robustesse testée")
+    print()
+    print(f"→ Analyser les figures pour identifier patterns universels vs spécificités")
 
 
 if __name__ == "__main__":
