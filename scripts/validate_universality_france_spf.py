@@ -107,8 +107,27 @@ def load_spf_regions(region_name, start_date='2020-03-01', end_date='2020-07-31'
     return df_reg
 
 
-def calculate_susceptibility(signal, window=14):
-    """Calcule χ(t) = variance glissante."""
+def calculate_susceptibility(signal, window=14, normalize=True):
+    """
+    Calcule χ(t) = variance glissante.
+
+    Args:
+        signal: Signal temporel
+        window: Fenêtre de variance glissante
+        normalize: Si True, normalise le signal avant calcul (INVARIANCE D'ÉCHELLE)
+
+    Returns:
+        chi: Susceptibilité
+    """
+    # NORMALISATION (invariance d'échelle des phénomènes critiques)
+    if normalize:
+        signal_max = np.max(signal)
+        if signal_max > 0:
+            signal = signal / signal_max  # Normaliser entre 0 et 1
+        else:
+            return np.zeros_like(signal)
+
+    # Variance glissante
     chi = pd.Series(signal).rolling(window=window, center=True).var()
     return chi.fillna(0).values
 
@@ -251,11 +270,25 @@ def analyze_entity(name, data, entity_type='departement', window=14, gamma_unive
     try:
         sr_params, sr_rms = sr_model.fit(t_data, signal, maxfev=50000)
         signal_sr = sr_model.predict(t_data)
+        sr_modes = sr_model.get_mode_parameters()
     except:
         return None
 
-    # Calculer χ sur SR
-    chi_sr = calculate_susceptibility(signal_sr, window=window)
+    # FENÊTRE ADAPTATIVE basée sur τ_moyen des modes SR
+    # Justification: τ définit l'échelle temporelle caractéristique
+    # → window doit s'adapter (invariance d'échelle temporelle)
+    if len(sr_modes) > 0:
+        tau_values = [mode['T'] for mode in sr_modes if mode['T'] > 0]
+        if len(tau_values) > 0:
+            tau_mean = np.mean(tau_values)
+            window_adaptive = max(7, int(2.0 * tau_mean))  # Fenêtre = 2×τ (minimum 7j)
+        else:
+            window_adaptive = window
+    else:
+        window_adaptive = window
+
+    # Calculer χ sur SR (avec NORMALISATION + fenêtre adaptative)
+    chi_sr = calculate_susceptibility(signal_sr, window=window_adaptive, normalize=True)
 
     # Mesurer γ (libre)
     gamma_sr, tc_sr, r2_sr, fit_sr = fit_power_law_rising_phase(t_data, chi_sr)
@@ -268,6 +301,9 @@ def analyze_entity(name, data, entity_type='departement', window=14, gamma_unive
     else:
         gamma_pred, tc_pred, r2_pred = None, None, None
 
+    # Extraire τ_moyen pour info
+    tau_mean_value = tau_mean if len(sr_modes) > 0 and len(tau_values) > 0 else None
+
     results = {
         'name': name,
         'type': entity_type,
@@ -278,6 +314,8 @@ def analyze_entity(name, data, entity_type='departement', window=14, gamma_unive
         'tc_sr': tc_sr,
         'r2_sr': r2_sr,
         'sr_rms': sr_rms,
+        'tau_mean': tau_mean_value,
+        'window_used': window_adaptive,
         # Prédiction avec γ fixe
         'gamma_pred': gamma_pred,
         'tc_pred': tc_pred,
@@ -299,7 +337,13 @@ def main():
     print()
     print("Hypothèse: γ ≈ 2.4 universel à toutes les échelles")
     print("Test: Départements + Régions françaises (vague 1)")
-    print("Extension: Prédiction t_c avec γ fixe")
+    print()
+    print("INNOVATIONS MÉTHODOLOGIQUES:")
+    print("  1. NORMALISATION des signaux SR: I_norm = I_SR / max(I_SR)")
+    print("     → Invariance d'échelle (amplitude)")
+    print("  2. FENÊTRE ADAPTATIVE: window = 2 × τ_moyen(modes SR)")
+    print("     → Invariance d'échelle (temps)")
+    print("  Justification: γ ne doit dépendre NI de l'amplitude NI de l'échelle temporelle")
     print()
 
     # Constante universelle (issue des 19 pays)
@@ -401,6 +445,20 @@ def main():
     log_print(f"\n✅ {len(results_dep)} départements validés")
     log_print(f"✅ {len(results_reg)} régions validées")
     log_print(f"✅ {len(all_results)} entités TOTAL")
+
+    # Rapport fenêtres adaptatives
+    windows_dep = [r['window_used'] for r in results_dep if r['window_used'] is not None]
+    windows_reg = [r['window_used'] for r in results_reg if r['window_used'] is not None]
+    tau_dep = [r['tau_mean'] for r in results_dep if r['tau_mean'] is not None]
+    tau_reg = [r['tau_mean'] for r in results_reg if r['tau_mean'] is not None]
+
+    log_print("\n📏 FENÊTRES ADAPTATIVES:")
+    if len(windows_dep) > 0:
+        log_print(f"  Départements: window = {np.mean(windows_dep):.1f} ± {np.std(windows_dep):.1f} jours")
+        log_print(f"                τ_moyen = {np.mean(tau_dep):.1f} ± {np.std(tau_dep):.1f} jours")
+    if len(windows_reg) > 0:
+        log_print(f"  Régions:      window = {np.mean(windows_reg):.1f} ± {np.std(windows_reg):.1f} jours")
+        log_print(f"                τ_moyen = {np.mean(tau_reg):.1f} ± {np.std(tau_reg):.1f} jours")
 
     # Statistiques γ(SR) libre
     gammas_dep = [r['gamma_sr'] for r in results_dep if r['gamma_sr'] and 0.1 < r['gamma_sr'] < 3.5]
