@@ -474,13 +474,15 @@ def main():
         ("United Kingdom", "2020-02-15", "2020-08-31"),
     ]
 
-    # Paramètres
-    WINDOW_CHI_VALUES = [7, 10, 14, 21, 28, 40, 60]  # Fenêtres à tester
+    # Paramètres - ZOOM sur zone critique [2-20j] par pas de 1j
+    # Analyse dense comme FFT haute résolution
+    WINDOW_CHI_VALUES = list(range(2, 21))  # [2, 3, 4, ..., 19, 20]
     WINDOW_GAMMA = 30  # Fenêtre pour fit γ local
-    STEP_GAMMA = 5     # Pas de déplacement
+    STEP_GAMMA = 3     # Pas de déplacement (plus fin pour capturer détails)
 
-    print(f"Paramètres:")
-    print(f"  - Fenêtres χ testées: {WINDOW_CHI_VALUES}")
+    print(f"Paramètres - ZOOM haute résolution:")
+    print(f"  - Fenêtres χ testées: {len(WINDOW_CHI_VALUES)} valeurs de {WINDOW_CHI_VALUES[0]}j à {WINDOW_CHI_VALUES[-1]}j")
+    print(f"  - Résolution: 1 jour (analyse dense type FFT)")
     print(f"  - Fenêtre fit γ: {WINDOW_GAMMA}j")
     print(f"  - Pas déplacement: {STEP_GAMMA}j")
     print()
