@@ -51,8 +51,27 @@ def load_country_data_direct(country_name):
     return result
 
 
-def calculate_susceptibility(signal, window=14):
-    """Calcule χ(t) = variance glissante."""
+def calculate_susceptibility(signal, window=14, normalize=True):
+    """
+    Calcule χ(t) = variance glissante.
+
+    Args:
+        signal: Signal temporel
+        window: Fenêtre de variance glissante
+        normalize: Si True, normalise le signal avant calcul (INVARIANCE D'ÉCHELLE)
+
+    Returns:
+        chi: Susceptibilité
+    """
+    # NORMALISATION (invariance d'échelle des phénomènes critiques)
+    if normalize:
+        signal_max = np.max(signal)
+        if signal_max > 0:
+            signal = signal / signal_max  # Normaliser entre 0 et 1
+        else:
+            return np.zeros_like(signal)
+
+    # Variance glissante
     chi = pd.Series(signal).rolling(window=window, center=True).var()
     return chi.fillna(0).values
 
@@ -169,14 +188,28 @@ def analyze_double_validation(country, start_date, end_date, window=14):
         print(f"    ❌ SR fit failed: {e}")
         return None
 
-    # Calculer χ sur DONNÉES RÉELLES
+    # FENÊTRE ADAPTATIVE basée sur τ_moyen des modes SR
+    # Justification: Invariance d'échelle temporelle
+    if len(sr_modes) > 0:
+        tau_values = [mode['T'] for mode in sr_modes if mode['T'] > 0]
+        if len(tau_values) > 0:
+            tau_mean = np.mean(tau_values)
+            window_adaptive = max(7, int(2.0 * tau_mean))  # Fenêtre = 2×τ (minimum 7j)
+        else:
+            window_adaptive = window
+            tau_mean = None
+    else:
+        window_adaptive = window
+        tau_mean = None
+
+    # Calculer χ sur DONNÉES RÉELLES (sans normalisation, fenêtre fixe)
     print(f"  Computing χ(real data)...")
-    chi_real = calculate_susceptibility(deaths_real, window=window)
+    chi_real = calculate_susceptibility(deaths_real, window=window, normalize=False)
     gamma_real, tc_real, r2_real, fit_real = fit_power_law_rising_phase(t_data, chi_real)
 
-    # Calculer χ sur MODÈLE SR
-    print(f"  Computing χ(SR model)...")
-    chi_sr = calculate_susceptibility(deaths_sr, window=window)
+    # Calculer χ sur MODÈLE SR (AVEC normalisation + fenêtre adaptative)
+    print(f"  Computing χ(SR model)... [window={window_adaptive}j, normalize=True]")
+    chi_sr = calculate_susceptibility(deaths_sr, window=window_adaptive, normalize=True)
     gamma_sr, tc_sr, r2_sr, fit_sr = fit_power_law_rising_phase(t_data, chi_sr)
 
     # Détecter pics
@@ -213,9 +246,11 @@ def analyze_double_validation(country, start_date, end_date, window=14):
         't_chi_sr': t_chi_sr,
         't_deaths_sr': t_deaths_sr,
         'delta_t_sr': delta_t_sr,
-        # SR modes
+        # SR modes + paramètres adaptatifs
         'sr_modes': sr_modes,
         'sr_rms': sr_rms,
+        'tau_mean': tau_mean,
+        'window_adaptive': window_adaptive,
         # Pour plots
         't_data': t_data,
         'deaths_real': deaths_real,
@@ -360,8 +395,12 @@ def main():
     print("="*80)
     print()
     print("Hypothèse: Si théorie cohérente, χ(SR) doit diverger comme prédit")
-    print("Avantage: Signal SR lisse → γ plus robuste")
     print("Extension: 19 pays européens (au lieu de 5)")
+    print()
+    print("INNOVATIONS MÉTHODOLOGIQUES:")
+    print("  1. NORMALISATION: I_SR normalisé avant calcul χ (invariance amplitude)")
+    print("  2. FENÊTRE ADAPTATIVE: window = 2×τ_moyen (invariance temporelle)")
+    print("  → Test cohérence: γ≈2.4 doit rester stable avec ces corrections")
     print()
 
     # 19 pays européens - Vague 1 (Mars-Juin 2020)
@@ -462,8 +501,18 @@ def main():
         return
 
     log_print("\n" + "="*80)
-    log_print("SYNTHÈSE GLOBALE - 19 PAYS")
+    log_print("SYNTHÈSE GLOBALE - 19 PAYS (avec normalisation + fenêtre adaptative)")
     log_print("="*80)
+
+    # Rapport fenêtres adaptatives
+    tau_values = [r['tau_mean'] for r in all_results if r['tau_mean'] is not None]
+    window_values = [r['window_adaptive'] for r in all_results if r['window_adaptive'] is not None]
+
+    if len(tau_values) > 0:
+        log_print("\n📏 FENÊTRES ADAPTATIVES:")
+        log_print(f"  τ_moyen (modes SR): {np.mean(tau_values):.1f} ± {np.std(tau_values):.1f} jours")
+        log_print(f"  window adaptative:  {np.mean(window_values):.1f} ± {np.std(window_values):.1f} jours")
+        log_print(f"  (window = 2 × τ_moyen, minimum 7j)")
 
     # Table récapitulative
     log_print("\n📊 TABLEAU RÉCAPITULATIF:")
