@@ -127,9 +127,6 @@ def analyze_with_all_models(t_data, y_data, n_modes=4):
         threshold_factor=1.2,  # Réduit pour détecter plus de modes
         min_time_separation=8  # Force séparation temporelle 8 jours minimum
     )
-    # 3. CWT Model
-    print("🔬 Ajustement CWT Model...")
-    cwt_model = CWTModel(n_modes=n_modes, wavelet='morl', threshold_factor=2.0)
     cwt_rms = cwt_model.fit(t_data, y_data)
     cwt_fit = cwt_model.predict(t_data)
     cwt_quality = cwt_model.get_fit_quality(t_data, y_data)
