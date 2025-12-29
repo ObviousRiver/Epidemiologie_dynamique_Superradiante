@@ -28,6 +28,9 @@ class CWTModel:
     imposer via un fit global comme dans SuperRadiantModel.
     """
 
+    def __init__(self, n_modes=4, wavelet='morl', scales=None, threshold_factor=1.2, min_time_separation=8):
+        """
+        Initialise le modèle CWT (VERSION AMÉLIORÉE).
     def __init__(self, n_modes=4, wavelet='morl', scales=None, threshold_factor=2.0):
         """
         Initialise le modèle CWT.
@@ -39,12 +42,16 @@ class CWTModel:
             scales (array, optional): Les échelles à analyser. Si None, des
                                       échelles sont générées automatiquement.
             threshold_factor (float): Facteur pour le seuil de détection des pics.
+                                     Réduit à 1.2 pour détecter plus de modes.
+            min_time_separation (int): Séparation temporelle minimale entre modes (jours).
+                                      Force les modes à être distincts temporellement.
                                      Un facteur plus élevé signifie moins de modes.
         """
         self.n_modes = n_modes
         self.wavelet = wavelet
         self.scales = scales
         self.threshold_factor = threshold_factor
+        self.min_time_separation = min_time_separation
         self.modes = None  # Stockera les paramètres des modes identifiés
         self.rms_error = None
         self.coefficients = None  # Scalogramme CWT
@@ -85,6 +92,9 @@ class CWTModel:
 
         # 2. Génération des échelles si non fournies
         if self.scales is None:
+            # AMÉLIORATION: Échelles calibrées pour T typiques de 2-30 jours
+            # Résolution plus fine dans la zone critique
+            frequencies = np.linspace(1/60, 1/2, 120)  # Fréquences en 1/jour (périodes 2-60j)
             # Génération d'échelles pour couvrir des périodes de 3 à 80 jours
             # C'est un choix heuristique, adaptable.
             # On utilise plus de points pour une meilleure résolution
@@ -99,6 +109,44 @@ class CWTModel:
             sampling_period=dt
         )
 
+        # 4. AMÉLIORATION: Identification des modes avec séparation temporelle forcée
+        abs_coeffs = np.abs(self.coefficients)
+
+        # Calculer le seuil dynamiquement (réduit pour détecter plus de modes)
+        threshold = np.mean(abs_coeffs) + self.threshold_factor * np.std(abs_coeffs)
+
+        # Méthode améliorée: Sommer l'énergie sur toutes les échelles pour chaque temps
+        # Cela donne un profil temporel robuste indépendant de l'échelle
+        energy_profile = np.sum(abs_coeffs, axis=0)  # Somme sur les échelles
+
+        # Trouver les pics temporels dans le profil d'énergie
+        # distance=min_time_separation force les pics à être séparés
+        time_peaks, properties = find_peaks(
+            energy_profile,
+            distance=self.min_time_separation,
+            prominence=np.std(energy_profile) * 0.3
+        )
+
+        # Pour chaque pic temporel, trouver la meilleure échelle
+        peak_candidates = []
+        for time_idx in time_peaks:
+            # Trouver l'échelle qui maximise l'amplitude à ce temps
+            scale_idx = np.argmax(abs_coeffs[:, time_idx])
+            amplitude = abs_coeffs[scale_idx, time_idx]
+
+            # Filtrer par seuil
+            if amplitude > threshold:
+                peak_candidates.append({
+                    'scale_idx': scale_idx,
+                    'time_idx': time_idx,
+                    'amplitude': amplitude,
+                    'energy': energy_profile[time_idx]
+                })
+
+        # Trier par énergie totale (plus robuste que l'amplitude seule)
+        peak_candidates = sorted(peak_candidates, key=lambda x: x['energy'], reverse=True)
+
+        # Prendre les n_modes premiers
         # 4. Identification des modes significatifs
         # On cherche les n_modes pics les plus élevés dans le scalogramme
         # Stratégie améliorée: chercher les pics dans chaque échelle temporelle
@@ -134,12 +182,24 @@ class CWTModel:
             scale_idx = peak['scale_idx']
             time_idx = peak['time_idx']
 
+            # AMÉLIORATION: Amplitude calibrée (moyenne locale)
+            # Prendre la moyenne sur une fenêtre pour être plus robuste
+            window = 2
+            t_start = max(0, time_idx - window)
+            t_end = min(len(t_data), time_idx + window + 1)
+            A = np.mean(abs_coeffs[scale_idx, t_start:t_end])
             # Amplitude du mode
             A = abs_coeffs[scale_idx, time_idx]
 
             # Temps du pic
             tau = t_data[time_idx]
 
+            # AMÉLIORATION: Largeur temporelle calibrée
+            # Correspondance scale CWT ↔ T sech²
+            # Pour Morlet: scale ≈ période ≈ 4*T (empirique)
+            scale = self.scales[scale_idx]
+            period = 1 / (self.frequencies[scale_idx] + 1e-10)  # Période en jours
+            T = period / 4.0  # Calibration empirique Morlet → sech²
             # Largeur temporelle: liée à l'échelle
             # L'échelle CWT correspond approximativement à la largeur temporelle
             # On utilise un facteur de correction pour correspondre à la définition de T dans sech²

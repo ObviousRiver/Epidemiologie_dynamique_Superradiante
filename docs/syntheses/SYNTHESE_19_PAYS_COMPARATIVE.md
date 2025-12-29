@@ -1,8 +1,3 @@
-# Synthèse Comparative : Super-Radiant vs SIR (VERSION DOGBOX)
-## Analyse de 19 Pays (Europe + Anglo-Saxons) - Vague 1 COVID-19
-
-**Version** : Optimisation DOGBOX - Correction des minima locaux TRF
-**Date de révision** : 10 décembre 2025 (mise à jour DOGBOX: amélioration -42.6% RMS SIR moyen)
 # Synthèse Comparative : Super-Radiant vs SIR (VERSION CORRIGÉE)
 ## Analyse de 19 Pays (Europe + Anglo-Saxons) - Vague 1 COVID-19
 
@@ -35,120 +30,11 @@ Cette version corrige les faiblesses de la méthodologie initiale identifiées p
 
 5. ✅ **Documentation des limites** : β et γ non-identifiables sans données de prévalence
 
-6. ✅ **Optimisation DOGBOX (NOUVEAU)** : Méthode Powell's dogleg plus robuste que TRF
-   - **Amélioration moyenne RMS SIR : -42.6%** sur les 19 pays
-   - Évite les minima locaux non-physiques (R0 ≈ 1, durée ≈ 1 jour)
-   - **USA bascule de "SR dominant 4.13×" à "SIR gagne 0.77×"** 🔵
-   - 9/19 pays avec amélioration > 70% du fit SIR
-
-**Impact** : L'optimisation DOGBOX **corrige** les problèmes de convergence TRF, réduisant drastiquement les ratios SR/SIR tout en maintenant la conclusion générale (17/19 pays SR gagne vs 18/19 avec TRF).
-
----
-
-## 📊 Tableau Récapitulatif des 19 Pays (Optimisation DOGBOX)
-
-| Pays | Population | RMS SR | RMS SIR (DOGBOX) | Ratio (SIR/SR) | Amélioration vs TRF | Régime | R0 SIR | Durée SIR |
-|------|------------|--------|------------------|----------------|---------------------|--------|--------|-----------|
-| **Australia** | 26M | 0.18 | **0.48** | **2.71×** | -3.4% | SR fort | 3.26 | 12.8 j ✅ |
-| **Netherlands** | 17.5M | 2.58 | **6.50** | **2.52×** ⭐ | **-75.3%** 🚀 | SR fort | 2.89 | 10.5 j ✅ |
-| **Switzerland** | 8.7M | 0.55 | **1.36** | **2.46×** ⭐ | **-70.8%** 🚀 | SR fort | 4.09 | 14.8 j ✅ |
-| **Italy** | 60M | 10.11 | **20.55** | **2.03×** | **-72.2%** 🚀 | SR modéré | 6.80 | 26.5 j ⚠️ |
-| **Ireland** | 5M | 2.46 | **4.75** | **1.93×** | -32.4% | SR modéré | 3.82 | 16.2 j ✅ |
-| **Portugal** | 10M | 1.05 | **2.00** | **1.91×** ⚖️ | -0.5% | SR modéré | 8.54 | **36.1 j** ⚠️ |
-| **Finland** | 5.5M | 0.36 | **0.62** | **1.74×** ⚖️ | -33.3% | SR faible | 3.49 | 13.7 j ✅ |
-| **Canada** | 38M | 3.69 | **6.35** | **1.72×** ⚖️ | **-76.4%** 🚀 | SR faible | 4.64 | 16.7 j ✅ |
-| **Austria** | 9M | 0.74 | **1.10** | **1.48×** ⚖️ | -45.6% | SR faible | 5.33 | 19.2 j ✅ |
-| **Denmark** | 5.8M | 0.55 | **0.81** | **1.48×** ⚖️ | -31.9% | SR faible | 5.24 | 18.7 j ✅ |
-| **Spain** | 47M | 28.38 | **41.71** | **1.47×** ⚖️ | 0.0% | SR faible | 8.61 | **23.0 j** ⚠️ |
-| **Norway** | 5.4M | 0.32 | **0.47** | **1.46×** ⚖️ | -40.5% | SR faible | 3.50 | 13.8 j ✅ |
-| **Sweden** | 10M | 4.51 | **6.27** | **1.39×** ⚖️ | -5.8% | SR faible | 8.41 | **40.0 j** ⚠️ |
-| **France** | 67M | 22.54 | **31.35** | **1.39×** ⚖️ | -33.2% | SR faible | 4.72 | 15.1 j ✅ |
-| **Belgium** | 11.5M | 7.97 | **9.88** | **1.24×** ⚖️ | -54.6% | Transition | 6.81 | 25.5 j ⚠️ |
-| **New Zealand** | 5M | 0.07 | **0.08** | **1.17×** ⚖️ | **-73.8%** 🚀 | Transition | 5.62 | 19.7 j ✅ |
-| **Germany** | 83M | 5.02 | **5.82** | **1.16×** ⚖️ | **-78.3%** 🚀 | Transition | 3.57 | 14.0 j ✅ |
-| **USA** | 331M | 68.20 | **52.44** | **0.77×** 🔵 | **-81.4%** 🚀 | **SIR GAGNE** | 4.54 | 15.0 j ✅ |
-| **UK** | 67M | 18.91 | **8.51** | **0.45×** 🔵 | 0.0% | **SIR GAGNE** | 6.06 | **23.1 j** ⚠️ |
-
-**Légende** :
-- ⭐ = Ratio > 2.4× (SR fort, DOGBOX révèle que max désormais 2.71× vs 10.2× avec TRF)
-- ⚖️ = Ratio 1.2-2.0× (SR faible / zone de transition)
-- 🔵 = Ratio < 1× (SIR gagne - 2 pays : USA + UK)
-- 🚀 = Amélioration > 70% avec DOGBOX (minima locaux TRF corrigés)
-- ✅ = Paramètres SIR physiquement réalistes (R0: 2.5-9, Durée: 10-20 j)
-- ⚠️ = Paramètres SIR hors consensus (durée > 20j, compensation artificielle)
-
-**Observations DOGBOX (révisions majeures)** :
-
-1. 🔵 **USA bascule** : De "SR dominant 4.13×" (TRF) → **SIR gagne 0.77×** (DOGBOX) - Correction majeure !
-2. ✅ **2/4 pays anglo-saxons** : SIR gagne (USA 0.77×, UK 0.45×)
-3. ✅ **2/4 pays anglo-saxons** : SR gagne (Australia 2.71×, NZ 1.17×)
-4. ✅ **Paramètres SIR réalistes** : DOGBOX produit R0 et durées physiquement plausibles (sauf UK, Sweden, Portugal)
-5. 🔬 **Canada** : Ratio réduit de 7.3× → 1.72× (-76%), maintenant proche transition
-6. 🔬 **Tous les pays** : Amélioration moyenne RMS SIR -42.6%
-
-**Verdict sur l'hypothèse de biais anglo-saxon** :
-
-> **HYPOTHÈSE DÉFINITIVEMENT REJETÉE** : Les données JHU sont rigoureuses. USA (source JHU) montre SIR gagnant, prouvant l'absence de biais pro-SR. La structure fédérale + coordination nationale → SIR (USA, UK) vs fédérale sans coordination → SR (Australia, Canada).
-
-**Statistiques globales DOGBOX (19 pays)** :
-- **17/19 pays** (89%) : SR meilleur que SIR
-- **2/19 pays** (11%) : SIR gagne (USA 0.77×, UK 0.45×)
-- **3/19 pays** (16%) : SR TRÈS dominant (ratio > 2.4× vs 79% avec TRF)
-- **3/19 pays** (16%) : Transition (ratio 1.1-1.2×, quasi-égalité)
-
----
-
-## 🔬 Découverte Majeure DOGBOX : Le SIR Gagne dans DEUX Cas (USA + UK)
-
-### **Résultat Clé**
-
-Sur les 19 pays analysés avec optimisation DOGBOX :
-- ✅ **17/19 pays** (89%) : Le SR est meilleur que le SIR
-- 🔵 **2/19 pays** (11%) : Le SIR gagne → **USA (0.77×) + UK (0.45×)**
-
-**Changement majeur vs TRF** : USA était "SR dominant 4.13×" avec TRF, devient "SIR gagne 0.77×" avec DOGBOX. TRF convergeait vers un **minimum local non-physique**.
-
-**Interprétation affinée** : Un régime "SIR dominant" **existe** mais est **rare** (2 cas sur 19, 11%). Pattern émergent :
-
-| Pays | Structure | Coordination COVID-19 | Résultat |
-|------|-----------|----------------------|----------|
-| **USA** | Fédérale (50 états) | Forte (CDC, Federal Guidelines) | **SIR gagne 0.77×** 🔵 |
-| **UK** | Unitaire dévolu | Forte (NHS, lockdown national) | **SIR gagne 0.45×** 🔵 |
-| **Canada** | Fédérale (10 provinces) | Modérée (provincial lead) | SR 1.72× ⚖️ |
-| **Australia** | État-fédéral | État-level strict | SR 2.71× |
-| **Switzerland** | Fédérale (26 cantons) | Faible (autonomie cantonale) | SR 2.46× |
-| **Germany** | Fédérale (16 Länder) | Modérée-Faible | SR 1.16× ⚖️ (transition) |
-
-**Hypothèse confirmée** : Fédéralisme + **coordination nationale forte** → SIR gagne. Fédéralisme sans coordination centrale → SR multi-modes.
-
-**Paramètres SIR avec DOGBOX** : 14/19 pays (74%) ont maintenant des paramètres **physiquement réalistes** (R0: 2.5-9, durée: 10-20j), vs 1/19 avec TRF. DOGBOX corrige les minima locaux aberrants.
 **Impact** : Ces corrections **révèlent** les faiblesses du SIR (paramètres non-physiques) que la normalisation **masquait** dans la version originale.
 
 ---
 
-## 🔬 Validation par BIC (Bayesian Information Criterion)
-
-### **Critère Complémentaire Rigoureux**
-
-Le BIC ajoute une **pénalité de complexité** au critère RMS : `BIC = n*ln(RSS/n) + k*ln(n)` où k est le nombre de paramètres.
-
-**Résultats BIC (19 pays)** :
-- **Accord RMS ↔ BIC : 18/19 pays (94.7%)** ✅
-- **SR gagne (BIC) : 16/19 pays (84.2%)**
-- **SIR gagne (BIC) : 3/19 pays (15.8%)** (USA, UK, + 1 autre selon BIC)
-- **Seul désaccord** : Sweden (RMS dit SR 1.06×, BIC dit SIR -9.3)
-
-**Pays exceptionnels où SIR gagne (RMS et BIC d'accord)** :
-- **USA** : Ratio RMS = 0.77× (SIR gagne), ΔBIC = -111.4 (SIR gagne) → Structure homogénéisée à échelle nationale
-- **UK** : Ratio RMS = 0.45× (SIR gagne), ΔBIC = -256.6 (SIR gagne) → Structure monocentrique (dominance Londres), SIR quasi-parfait (R²=1.000)
-
-**Interprétation** : Le BIC confirme et renforce les conclusions du ratio RMS (94.7% accord). Les pays à **structure multi-modes** (France, Italie, Allemagne) montrent SR clairement supérieur (ΔBIC > +50), tandis que les pays à **structure homogène/monocentrique** (USA, UK) sont mieux modélisés par SIR (ΔBIC < -100). Cette dichotomie valide l'hypothèse que la structure géographique influence le choix du modèle optimal.
-
-Voir synthèse comparative multi-échelles : `docs/SYNTHESE_BIC_FRANCE_MULTINIVEAUX.md`
-
----
-
-## 📊 Tableau Récapitulatif des 19 Pays (DOGBOX, pas encore mis à jour avec BIC)
+## 📊 Tableau Récapitulatif des 15 Pays (Données Consolidées)
 
 | Pays | Population | RMS SR (best) | RMS SIR | Ratio (SIR/SR) | Régime | R0 SIR | Durée infection SIR |
 |------|------------|---------------|---------|----------------|--------|--------|---------------------|

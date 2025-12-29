@@ -119,6 +119,14 @@ def analyze_with_all_models(t_data, y_data, n_modes=4):
     }
     print(f"  ✅ SIR: RMS={sir_quality['rms']:.2f}, R²={sir_quality['r2']:.4f}, R0={sir_params['R0']:.2f}")
 
+    # 3. CWT Model (VERSION AMÉLIORÉE)
+    print("🔬 Ajustement CWT Model (algorithme amélioré)...")
+    cwt_model = CWTModel(
+        n_modes=n_modes,
+        wavelet='morl',
+        threshold_factor=1.2,  # Réduit pour détecter plus de modes
+        min_time_separation=8  # Force séparation temporelle 8 jours minimum
+    )
     # 3. CWT Model
     print("🔬 Ajustement CWT Model...")
     cwt_model = CWTModel(n_modes=n_modes, wavelet='morl', threshold_factor=2.0)
